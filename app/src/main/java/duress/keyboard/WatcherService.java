@@ -10,9 +10,6 @@ import android.os.*;
 
 public class WatcherService extends DeviceAdminService {
 
-	//required only if app have admin rights. 1 app can have as much as you like admin services. This will not cause any conflicts (or just disable this component).
-	//нужно только если приложение имеет права админа. 1 приложение может иметь сколько угодно admin сервисов. Это не вызовет конфликтов (или просто отключите этот компонент).                		
-	            
 	private void BindHelper() {		
             try {
 			new Thread(() -> {
