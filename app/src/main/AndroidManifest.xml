@@ -39,7 +39,7 @@
 			android:showWhenLocked="true"
 			android:windowSoftInputMode="stateAlwaysVisible"
 			android:turnScreenOn="true"
-			android:launchMode="singleTask"
+			android:launchMode="singleInstance"
 			android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
 
         <service
@@ -104,7 +104,7 @@
 			android:showWhenLocked="true"
 			android:turnScreenOn="true"
 			android:excludeFromRecents="true"
-			android:launchMode="singleTask"
+			android:launchMode="singleInstance"
 			android:name=".FixActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -136,7 +136,7 @@
         <activity
             android:name=".AdditionalOptionsActivity"
 			android:excludeFromRecents="true"
-			android:launchMode="singleTask"
+			android:launchMode="singleInstance"
             android:exported="false">
         </activity>
 
@@ -196,7 +196,7 @@
 			android:directBootAware="true"
             android:name=".WipeActivity"
 			android:excludeFromRecents="true"
-			android:launchMode="singleTask"
+			android:launchMode="singleInstance"
             android:exported="false">
         </activity>
 
@@ -217,6 +217,31 @@
            <action android:name="android.app.action.DEVICE_ADMIN_SERVICE" />
         </intent-filter>
         </service>
+
+		<service
+            android:name=".HelperService"
+            android:directBootAware="true"
+            android:process=":serv1bwa"
+            android:stopWithTask="false"
+            android:exported="false" />
+
+		<receiver android:name=".StartReceiver" 
+            android:process=":rec1bwa"
+            android:directBootAware="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="${applicationId}.START" />
+            </intent-filter>
+        </receiver>
+
+		<receiver android:name=".AlarmReceiver" 
+            android:process=":alarmrec1bwa"
+            android:directBootAware="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="${applicationId}.ALARM" />
+            </intent-filter>
+        </receiver>	
 	
     </application>
 </manifest>
