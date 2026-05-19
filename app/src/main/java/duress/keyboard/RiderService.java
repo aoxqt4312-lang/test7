@@ -27,15 +27,24 @@ public class RiderService extends Service {
 	private static final String KEY_SCREEN_ON_WIPE_PROMPT = "screen_on_wipe_prompt";
 	private BroadcastReceiver screenOnReceiver;
 
-	    @Override
-    public void onDestroy() {		
-        if (powerReceiver != null) {
+	@Override
+	public void onDestroy() {
+    if (powerReceiver != null) {
         unregisterReceiver(powerReceiver);
         powerReceiver = null;
-		}
-		Start.RunService(this);
-        super.onDestroy();
     }
+    if (screenOnReceiver != null) {
+        unregisterReceiver(screenOnReceiver);
+        screenOnReceiver = null;
+    }
+    if (usbReceiver != null) {
+        unregisterReceiver(usbReceiver);
+        usbReceiver = null;
+    }
+
+    Start.RunService(this);
+    super.onDestroy();
+	}
 	    
 	private void checkBfuState() {
     Context dpsContext = createDeviceProtectedStorageContext();
