@@ -47,7 +47,7 @@ Go to Settings in your phone, find 'Build Number' and tap 10 times. Then find 'D
 
 To use ADB via Wi-Fi  
 Enable Wireless debugging in Developer Options, install [Shizuku](https://github.com/RikkaApps/Shizuku/releases/latest), and use its built-in pairing guide.  
-Then install [aShell](https://f-droid.org/packages/in.sunilpaulmathew.ashell/). Open it, allow acess to Shizuku, and use required ADB command.
+Then install [aShell](https://f-droid.org/packages/in.sunilpaulmathew.ashell/). Open it, allow access to Shizuku, and use required ADB command.
 
 To use ADB via PC  
 Enable USB debugging in Developer Options.
@@ -65,7 +65,7 @@ Connect phone to PC via USB cable, open terminal and run: ```cd ~/adb```, then `
 
 Or if you don't want to use ADB, just disable the Google Play (Store) and Google Play Services apps in [your phone's app settings](https://pofesk0.github.io/open-app-settings-proxy.html) during installation. However, this will only work if the installation block is not at the Android system level. It can be at the Android level, for example, if the app is too outdated for the current system, not just for Play-Protect. Or if Google tightens the restrictions in the future. In that case, you will have to go back to the ADB option.
 
-If you still can't install and the reason is outdated target SDK (it is here intentionally low because of policy changes in new SDKs regarding wipe-data), then use Lite version:
+If you still can't install and the reason is outdated target SDK (it is intentionally low here because of policy changes in new SDKs regarding wipe-data), then use Lite version:
 
 https://github.com/pofesk0/DuressKeyboardLite/releases/latest  
 https://f-droid.org/packages/duress.keyboard.lite/
