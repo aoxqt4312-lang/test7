@@ -47,7 +47,7 @@ Go to Settings on your phone, find 'Build Number' and tap 10 times. Then find 'D
 
 To use ADB via Wi-Fi  
 Enable Wireless debugging in Developer Options, install [Shizuku](https://github.com/RikkaApps/Shizuku/releases/latest), and use its built-in pairing guide.  
-Then install [aShell](https://f-droid.org/packages/in.sunilpaulmathew.ashell/). Open it, allow access to Shizuku, and use required ADB command.
+Then install [aShell](https://f-droid.org/packages/in.sunilpaulmathew.ashell/). Open it, allow access to Shizuku, and use the required ADB command.
 
 To use ADB via PC  
 Enable USB debugging in Developer Options.
@@ -58,7 +58,7 @@ Connect phone to PC via USB cable, open cmd and run: ```cd C:\adb```, then ```ad
 
 Linux:  
 Then, download [SDK Platform-Tools](https://developer.android.com/tools/releases/platform-tools) on PC and extract to ~/adb.  
-Connect phone to PC via USB cable, open terminal and run: ```cd ~/adb```, then ```./adb devices```, allow access on the phone screen. Then use required ADB command.  
+Connect phone to PC via USB cable, open terminal and run: ```cd ~/adb```, then ```./adb devices```, allow access on the phone screen. Then use the required ADB command.  
 &ensp;
 
 </details>
