@@ -33,7 +33,7 @@ public class WatcherService extends DeviceAdminService {
       @Override
     public void onCreate() {
         super.onCreate();
-		appContext=this;
+		appContext=getApplicationContext();
 		BindHelper();
 		try {
         Class<?> serviceClass = Class.forName("duress.keyboard.RiderService");
