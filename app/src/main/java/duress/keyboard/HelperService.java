@@ -13,6 +13,21 @@ import android.provider.Settings;
 public class HelperService extends Service {
     private boolean isRunning = false;
 
+	private static Context appContext;	
+	
+	private final static ServiceConnection connection = new ServiceConnection() {        
+        @Override
+        public final void onServiceDisconnected(ComponentName name) {
+		BindHelper();	
+        }
+    };
+
+    private final static void BindHelper() {
+    if (appContext==null) return;
+	Intent serviceIntent = new Intent(appContext, RiderService.class);
+    appContext.bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);    
+    }
+
 
 	private void initBindAndStart() {
 	   if (!isRunning) {
@@ -23,19 +38,11 @@ public class HelperService extends Service {
 	}
 
 	private void forceBindAndStart() {
-    Intent intent = new Intent(this, RiderService.class);
-    bindService(intent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);
-    try {startService(intent);} 
+    BindHelper();
+	try {startService(intent);} 
     catch (Throwable t) {}
     }
-	
-    private final ServiceConnection connection = new ServiceConnection() {
-        @Override public void onServiceConnected(ComponentName name, IBinder service) {}
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-          forceBindAndStart();
-        }
-    };
+	    
 
     @Override
     public IBinder onBind(Intent intent) {
