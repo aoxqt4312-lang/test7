@@ -266,6 +266,17 @@ public class MainActivity extends Activity {
 		super.onDestroy();
 		RESULT=false;
 		isPengingAdmin = 0;
+		
+		if (accessibilityDialog != null && accessibilityDialog.isShowing()) {
+        accessibilityDialog.dismiss();
+        accessibilityDialog = null;
+		}
+		
+		if (adminErrorDialog != null && adminErrorDialog.isShowing()) {
+        adminErrorDialog.dismiss();
+        adminErrorDialog = null;
+		}
+		
 		if (screenOffReceiver != null) {
 			unregisterReceiver(screenOffReceiver);
 			screenOffReceiver = null;
