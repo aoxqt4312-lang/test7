@@ -113,7 +113,7 @@ public class MainActivity extends Activity {
            .setView(root)
            .setCancelable(false);
            
-    final android.app.AlertDialog dialog = builder.create();
+    adminErrorDialog = builder.create();
 
     Button b1 = new Button(this);
     b1.setText(isRussian ? "Попробовать снова" : "Try again");
@@ -122,7 +122,7 @@ public class MainActivity extends Activity {
         @Override 
         public void onClick(View v) {
             isPengingAdmin=1;
-			dialog.dismiss();
+			adminErrorDialog.dismiss();
             AllowAdmin();
         }
     });
@@ -153,9 +153,9 @@ public class MainActivity extends Activity {
     }
     root.addView(t3, lp);
 
-    dialog.show();
+    adminErrorDialog.show();
 
-    android.view.Window window = dialog.getWindow();
+    android.view.Window window = adminErrorDialog.getWindow();
     if (window != null) {
         android.view.WindowManager.LayoutParams lp2 = window.getAttributes();
         lp2.gravity = android.view.Gravity.CENTER;
