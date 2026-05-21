@@ -8,7 +8,7 @@ This is a keyboard implementing the Duress Password feature.
 When used, it can wipe data (reset the phone settings) upon entry of a special pre-configured reset code on the lock screen.  
 This app can help if someone ever tries to force you to enter a screen unlock password.
 In this case, instead of it, you enter the reset code and press the Enter arrow (⏎).  
-Also this app has other security and data reset features.
+Also, this app has other security and data reset features.
 
 <details>
 <summary>Download  
@@ -54,7 +54,7 @@ Enable USB debugging in Developer Options.
 
 Windows:  
 Then, download [SDK Platform-Tools](https://developer.android.com/tools/releases/platform-tools) on PC and extract to C:\adb.  
-Connect phone to PC via USB cable, open cmd and run: ```cd C:\adb```, then ```adb devices```, and allow access on the phone screen. Then use required ADB command.
+Connect phone to PC via USB cable, open cmd and run: ```cd C:\adb```, then ```adb devices```, and allow access on the phone screen. Then use the required ADB command.
 
 Linux:  
 Then, download [SDK Platform-Tools](https://developer.android.com/tools/releases/platform-tools) on PC and extract to ~/adb.  
