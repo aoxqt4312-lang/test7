@@ -128,11 +128,11 @@ adb shell cp /storage/emulated/0/Download/app-release.apk /data/local/tmp/app.ap
 
 Windows:  
 Затем скачайте [SDK Platform-Tools](https://developer.android.com/tools/releases/platform-tools) на ПК и распакуйте в C:\adb.  
-Подключите телефон к ПК через USB-кабель, откройте cmd и выполните: ```cd C:\adb```, затем ```adb devices```, разрешите доступ на экране телефона. Затем используйте нужную команду ADB.
+Подключите телефон к ПК через USB-кабель, откройте cmd и выполните: ```cd C:\adb```, затем ```adb devices```, разрешите доступ на экране телефона. Затем используйте нужную ADB команду.
 
 Linux:  
 Затем скачайте [SDK Platform-Tools](https://developer.android.com/tools/releases/platform-tools) на ПК и распакуйте в ~/adb.  
-Подключите телефон к ПК через USB-кабель, откройте терминал и выполните: ```cd ~/adb```, затем ```./adb devices```, и разрешите доступ на экране телефона. Затем используйте нужную команду ADB.  
+Подключите телефон к ПК через USB-кабель, откройте терминал и выполните: ```cd ~/adb```, затем ```./adb devices```, и разрешите доступ на экране телефона. Затем используйте нужную ADB команду.  
 &ensp;
 
 </details>
