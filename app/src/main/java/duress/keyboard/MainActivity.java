@@ -25,6 +25,7 @@ import org.json.*;
 public class MainActivity extends Activity {
 
 	private android.app.AlertDialog accessibilityDialog;
+	private android.app.AlertDialog adminErrorDialog;
 	private static boolean main=true;
 	boolean accessibilityEnabled = false;
     private static final String PREFS_NAME = "SimpleKeyboardPrefs";
