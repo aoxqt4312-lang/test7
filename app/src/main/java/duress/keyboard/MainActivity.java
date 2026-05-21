@@ -84,7 +84,7 @@ public class MainActivity extends Activity {
 			);
 	}    
 
-  private void AdminErrorDialog() {
+  private void ShowAdminErrorDialog() {
     final boolean isRussian = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());
 
     final LinearLayout root = new LinearLayout(this);
@@ -510,7 +510,7 @@ public class MainActivity extends Activity {
 			AllowAdmin(); 
 			} else if (isPengingAdmin==1) {
 			isPengingAdmin=2;
-			AdminErrorDialog(); }
+			ShowAdminErrorDialog(); }
 			}
 
 
