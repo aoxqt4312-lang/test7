@@ -39,6 +39,7 @@ public class HelperService extends Service {
 
 	private void forceBindAndStart() {
     BindHelper();
+	Intent intent = new Intent(this, RiderService.class);	
 	try {startService(intent);} 
     catch (Throwable t) {}
     }
