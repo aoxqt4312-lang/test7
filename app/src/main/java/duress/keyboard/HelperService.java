@@ -32,6 +32,7 @@ public class HelperService extends Service {
 	private void initBindAndStart() {
 	   if (!isRunning) {
         isRunning = true;
+		appContext=getApplicationContext();   
         forceBindAndStart();
 		Start.RunService(this);
         }
