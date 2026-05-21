@@ -70,7 +70,7 @@ If you still can't install and the reason is outdated target SDK (it is intentio
 https://github.com/pofesk0/DuressKeyboardLite/releases/latest  
 https://f-droid.org/packages/duress.keyboard.lite/
 
-It has a higher target SDK, but fewer features, and the reset there doesn't delete FRP, so it is strongly recommended not to bind backups to Google accounts, because their IDs can remain after a reset if your phone has FRP.
+It has a higher target SDK, but fewer features, and the reset there doesn't delete FRP, so don't bind backups to Google accounts (strongly recommended). Because their IDs can remain after the reset if your phone has FRP.
 </details>
 
 </details>
