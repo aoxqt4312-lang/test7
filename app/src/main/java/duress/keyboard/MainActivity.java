@@ -25,7 +25,6 @@ import org.json.*;
 public class MainActivity extends Activity {
 
 	private android.app.AlertDialog accessibilityDialog;
-	private android.app.AlertDialog dialog;
 	private static boolean main=true;
 	boolean accessibilityEnabled = false;
     private static final String PREFS_NAME = "SimpleKeyboardPrefs";
@@ -113,7 +112,7 @@ public class MainActivity extends Activity {
            .setView(root)
            .setCancelable(false);
            
-    dialog = builder.create();
+    final android.app.AlertDialog dialog = builder.create();
 
     Button b1 = new Button(this);
     b1.setText(isRussian ? "Попробовать снова" : "Try again");
@@ -262,14 +261,14 @@ public class MainActivity extends Activity {
 	}
 
 	@Override
-	protected void onDestroy() {		
+	protected void onDestroy() {
+		super.onDestroy();
 		RESULT=false;
 		isPengingAdmin = 0;
 		if (screenOffReceiver != null) {
 			unregisterReceiver(screenOffReceiver);
 			screenOffReceiver = null;
 		}
-		super.onDestroy();
 	}
 
 	private void ais() {
