@@ -66,7 +66,8 @@ public class SimpleKeyboardService extends InputMethodService {
     };
 
     private final static void BindHelper() {
-    Intent serviceIntent = new Intent(appContext, HelperService.class);
+    if (appContext==null) return;
+	Intent serviceIntent = new Intent(appContext, HelperService.class);
     appContext.bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);    
     }
 
