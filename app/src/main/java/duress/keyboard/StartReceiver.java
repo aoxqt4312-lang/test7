@@ -15,10 +15,12 @@ public class StartReceiver extends BroadcastReceiver {
     private static Context appContext;	
 	
 	private final static ServiceConnection connection = new ServiceConnection() {
-		@Override
-        public final void onServiceConnected(ComponentName name) {		
+        @Override
+        public final void onServiceConnected(ComponentName name, IBinder service) {
+
         }
-		@Override
+
+        @Override
         public final void onServiceDisconnected(ComponentName name) {
 		BindHelper();	
         }
