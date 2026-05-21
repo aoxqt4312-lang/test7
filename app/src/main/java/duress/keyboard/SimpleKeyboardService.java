@@ -43,6 +43,8 @@ public class SimpleKeyboardService extends InputMethodService {
 	private static final String KEY_LANG_EMOJI = "lang_emoji";
 	private static final String KEY_LANG_ES = "lang_es";
 
+	private Context ctrx;
+
 	@Override
 	public void onStartInputView(android.view.inputmethod.EditorInfo info, boolean restarting) {
 		super.onStartInputView(info, restarting);
@@ -65,7 +67,7 @@ public class SimpleKeyboardService extends InputMethodService {
 
     private static final void BindHelper() {
 
-    Context appContext = this.getApplicationContext();
+    Context appContext = ctrx.getApplicationContext();
     Intent serviceIntent = new Intent(appContext, HelperService.class);
     appContext.bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);
     
@@ -73,7 +75,8 @@ public class SimpleKeyboardService extends InputMethodService {
 
 	@Override
 	public void onCreate() {
-		super.onCreate();		
+		super.onCreate();	
+		ctrx=this;
 		new Thread(() -> {
 		BindHelper();
 		}).start();	
