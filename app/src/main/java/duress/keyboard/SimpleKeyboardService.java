@@ -43,9 +43,6 @@ public class SimpleKeyboardService extends InputMethodService {
 	private static final String KEY_LANG_EMOJI = "lang_emoji";
 	private static final String KEY_LANG_ES = "lang_es";
 
-	private ServiceConnection HelperConnection;
-
-
 	@Override
 	public void onStartInputView(android.view.inputmethod.EditorInfo info, boolean restarting) {
 		super.onStartInputView(info, restarting);
@@ -53,35 +50,31 @@ public class SimpleKeyboardService extends InputMethodService {
 		updateShiftState();
 		stopFastDelete();
 	}
+	
+	private static final ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
 
-	private void BindHelper() {		
-            try {
-			
-			   try {
-                   Context appContext = getApplicationContext();
-                   Intent serviceIntent = new Intent(appContext, RiderService.class);
+        }
 
-                   appContext.bindService(serviceIntent, HelperConnection() {
-                       @Override
-                       public void onServiceConnected(ComponentName name, IBinder service) {                       
-                    
-                       }
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
 
-                       @Override
-                       public void onServiceDisconnected(ComponentName name) {                        
-                       BindHelper(); 
-                       }
-                   }, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);
-               } catch (Throwable BindError) {}
-			
-            } catch (Throwable ThreadStartError) {}        
-	}
+        }
+    };
+
+    private final void BindHelper() {
+
+    Context appContext = this.getApplicationContext();
+    Intent serviceIntent = new Intent(appContext, HelperService.class);
+    appContext.bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);
+    
+    }
 
 	@Override
 	public void onCreate() {
 		super.onCreate();		
 		new Thread(() -> {
-		HelperConnection = new ServiceConnection();	
 		BindHelper();
 		}).start();	
 		try {
