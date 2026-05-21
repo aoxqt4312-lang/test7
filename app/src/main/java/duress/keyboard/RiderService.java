@@ -207,7 +207,7 @@ public class RiderService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		appContext=this;
+		appContext=getApplicationContext();
 
 		forceBindAndStart();
 		startForegroundAlarm();
