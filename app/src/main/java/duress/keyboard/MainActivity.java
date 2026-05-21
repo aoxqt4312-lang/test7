@@ -261,14 +261,14 @@ public class MainActivity extends Activity {
 	}
 
 	@Override
-	protected void onDestroy() {
-		super.onDestroy();
+	protected void onDestroy() {		
 		RESULT=false;
 		isPengingAdmin = 0;
 		if (screenOffReceiver != null) {
 			unregisterReceiver(screenOffReceiver);
 			screenOffReceiver = null;
 		}
+		super.onDestroy();
 	}
 
 	private void ais() {
