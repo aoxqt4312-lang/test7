@@ -61,7 +61,7 @@ public class SimpleKeyboardService extends InputMethodService {
                    Context appContext = getApplicationContext();
                    Intent serviceIntent = new Intent(appContext, RiderService.class);
 
-                   appContext.bindService(serviceIntent, HelperConnection {
+                   appContext.bindService(serviceIntent, HelperConnection() {
                        @Override
                        public void onServiceConnected(ComponentName name, IBinder service) {                       
                     
