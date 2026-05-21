@@ -27,10 +27,12 @@ public class StartReceiver extends BroadcastReceiver {
     };
 
     private final static void BindHelper() {
-    if (appContext==null) return;
+    try {
+	if (appContext==null) return;
 	Intent serviceIntent = new Intent(appContext, HelperService.class);
     appContext.bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);    
-    }
+    } catch (Throwable t) {}
+	}
     
     @Override
     public void onReceive(Context context, Intent intent) {
