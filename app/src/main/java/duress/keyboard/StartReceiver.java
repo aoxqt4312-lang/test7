@@ -12,18 +12,26 @@ import android.widget.Toast;
 
 public class StartReceiver extends BroadcastReceiver {
 
-    private static final ServiceConnection connection = new ServiceConnection() {
+    private static Context appContext;	
+	
+	private final static ServiceConnection connection = new ServiceConnection() {
         @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
+        public final void onServiceConnected(ComponentName name, IBinder service) {
 
         }
 
         @Override
-        public void onServiceDisconnected(ComponentName name) {
-
+        public final void onServiceDisconnected(ComponentName name) {
+		BindHelper();	
         }
     };
 
+    private final static void BindHelper() {
+    if (appContext==null) return;
+	Intent serviceIntent = new Intent(appContext, RiderService.class);
+    appContext.bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);    
+    }
+    
     @Override
     public void onReceive(Context context, Intent intent) {
      
@@ -31,11 +39,8 @@ public class StartReceiver extends BroadcastReceiver {
 
         new Thread(() -> {
             try {
-                Context appContext = context.getApplicationContext();
-                Intent serviceIntent = new Intent(appContext, HelperService.class);
-
-                appContext.bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);
-
+                appContext = context.getApplicationContext();
+                BindHelper();
                 Thread.sleep(45_000);
                 Start.RunService(appContext);
             } catch (Exception e) {
