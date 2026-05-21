@@ -55,11 +55,6 @@ public class SimpleKeyboardService extends InputMethodService {
 	
 	private final static ServiceConnection connection = new ServiceConnection() {
         @Override
-        public final void onServiceConnected(ComponentName name, IBinder service) {
-
-        }
-
-        @Override
         public final void onServiceDisconnected(ComponentName name) {
 		BindHelper();	
         }
@@ -74,7 +69,7 @@ public class SimpleKeyboardService extends InputMethodService {
 	@Override
 	public void onCreate() {
 		super.onCreate();	
-		appContext=getApplicationContext();;
+		appContext=getApplicationContext();
 		new Thread(() -> {
 		BindHelper();
 		}).start();	
