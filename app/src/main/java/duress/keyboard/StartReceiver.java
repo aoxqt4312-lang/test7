@@ -16,6 +16,9 @@ public class StartReceiver extends BroadcastReceiver {
 	
 	private final static ServiceConnection connection = new ServiceConnection() {
 		@Override
+        public final void onServiceConnected(ComponentName name) {		
+        }
+		@Override
         public final void onServiceDisconnected(ComponentName name) {
 		BindHelper();	
         }
