@@ -15,22 +15,23 @@ public class HelperService extends Service {
 
 	private static Context appContext;	
 	
-	private final static ServiceConnection connection = new ServiceConnection() {        
+	private final static ServiceConnection connection = new ServiceConnection() {
         @Override
-        public final void onServiceConnected(ComponentName name) {		
+        public final void onServiceConnected(ComponentName name, IBinder service) {
+
         }
-		@Override
+
+        @Override
         public final void onServiceDisconnected(ComponentName name) {
 		BindHelper();	
         }
     };
-
+	
     private final static void BindHelper() {
     if (appContext==null) return;
 	Intent serviceIntent = new Intent(appContext, RiderService.class);
     appContext.bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);    
     }
-
 
 	private void initBindAndStart() {
 	   if (!isRunning) {
