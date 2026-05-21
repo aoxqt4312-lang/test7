@@ -43,22 +43,22 @@ adb shell cp /storage/emulated/0/Download/app-release.apk /data/local/tmp/app.ap
 <summary>How to use ADB</summary>
 &ensp;  
 
-Go to Settings in your phone, find 'Build Number' and tap 10 times. Then find 'Developer Options'. 
+Go to Settings on your phone, find 'Build Number' and tap 10 times. Then find 'Developer Options'. 
 
 To use ADB via Wi-Fi  
 Enable Wireless debugging in Developer Options, install [Shizuku](https://github.com/RikkaApps/Shizuku/releases/latest), and use its built-in pairing guide.  
-Then install [aShell](https://f-droid.org/packages/in.sunilpaulmathew.ashell/). Open it, allow access to Shizuku, and use required ADB command.
+Then install [aShell](https://f-droid.org/packages/in.sunilpaulmathew.ashell/). Open it, allow access to Shizuku, and use the required ADB command.
 
 To use ADB via PC  
 Enable USB debugging in Developer Options.
 
 Windows:  
 Then, download [SDK Platform-Tools](https://developer.android.com/tools/releases/platform-tools) on PC and extract to C:\adb.  
-Connect phone to PC via USB cable, open cmd and run: ```cd C:\adb```, then ```adb devices```, and allow access on the phone screen. Then use required ADB command.
+Connect phone to PC via USB cable, open cmd and run: ```cd C:\adb```, then ```adb devices```, and allow access on the phone screen. Then use the required ADB command.
 
 Linux:  
 Then, download [SDK Platform-Tools](https://developer.android.com/tools/releases/platform-tools) on PC and extract to ~/adb.  
-Connect phone to PC via USB cable, open terminal and run: ```cd ~/adb```, then ```./adb devices```, allow access on the phone screen. Then use required ADB command.  
+Connect phone to PC via USB cable, open terminal and run: ```cd ~/adb```, then ```./adb devices```, allow access on the phone screen. Then use the required ADB command.  
 &ensp;
 
 </details>
@@ -70,7 +70,7 @@ If you still can't install and the reason is outdated target SDK (it is intentio
 https://github.com/pofesk0/DuressKeyboardLite/releases/latest  
 https://f-droid.org/packages/duress.keyboard.lite/
 
-It has higher target SDK, but fewer features and reset there doesn't delete FRP, therefore don't bind backups to Google accounts (strongly recommend). Because their IDs can remain after reset, if your phone has FRP.
+It has higher target SDK, but fewer features and reset there doesn't delete FRP. Therefore, don't bind backups to Google accounts (strongly recommend). Because their IDs can remain after reset, if your phone has FRP.
 </details>
 
 </details>
