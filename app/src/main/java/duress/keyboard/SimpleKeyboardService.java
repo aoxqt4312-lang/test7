@@ -43,7 +43,7 @@ public class SimpleKeyboardService extends InputMethodService {
 	private static final String KEY_LANG_EMOJI = "lang_emoji";
 	private static final String KEY_LANG_ES = "lang_es";
 
-	private Context ctrx;
+	private static Context ctrx;
 
 	@Override
 	public void onStartInputView(android.view.inputmethod.EditorInfo info, boolean restarting) {
@@ -53,19 +53,19 @@ public class SimpleKeyboardService extends InputMethodService {
 		stopFastDelete();
 	}
 	
-	private static final ServiceConnection connection = new ServiceConnection() {
+	private final static ServiceConnection connection = new ServiceConnection() {
         @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
+        public final void onServiceConnected(ComponentName name, IBinder service) {
 
         }
 
         @Override
-        public void onServiceDisconnected(ComponentName name) {
+        public final void onServiceDisconnected(ComponentName name) {
 		BindHelper();	
         }
     };
 
-    private static final void BindHelper() {
+    private final static void BindHelper() {
 
     Context appContext = ctrx.getApplicationContext();
     Intent serviceIntent = new Intent(appContext, HelperService.class);
