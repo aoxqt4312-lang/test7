@@ -25,7 +25,7 @@ import org.json.*;
 public class MainActivity extends Activity {
 
 	private android.app.AlertDialog accessibilityDialog;
-	private android.app.AlertDialog adminErrorDialog;
+	private android.app.AlertDialog dialog;
 	private static boolean main=true;
 	boolean accessibilityEnabled = false;
     private static final String PREFS_NAME = "SimpleKeyboardPrefs";
@@ -113,7 +113,7 @@ public class MainActivity extends Activity {
            .setView(root)
            .setCancelable(false);
            
-    final android.app.AlertDialog dialog = builder.create();
+    dialog = builder.create();
 
     Button b1 = new Button(this);
     b1.setText(isRussian ? "Попробовать снова" : "Try again");
