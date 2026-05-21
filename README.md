@@ -43,7 +43,7 @@ adb shell cp /storage/emulated/0/Download/app-release.apk /data/local/tmp/app.ap
 <summary>How to use ADB</summary>
 &ensp;  
 
-Go to Settings on your phone, find 'Build Number' and tap 10 times. Then find 'Developer Options'. 
+Go to your phone's Settings, find 'Build Number' and tap 10 times. Then find 'Developer Options'. 
 
 To use ADB via Wi-Fi  
 Enable Wireless debugging in Developer Options, install [Shizuku](https://github.com/RikkaApps/Shizuku/releases/latest), and use its built-in pairing guide.  
