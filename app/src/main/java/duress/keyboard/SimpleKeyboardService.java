@@ -55,9 +55,11 @@ public class SimpleKeyboardService extends InputMethodService {
 	
 	private final static ServiceConnection connection = new ServiceConnection() {
         @Override
-        public final void onServiceConnected(ComponentName name) {		
+        public final void onServiceConnected(ComponentName name, IBinder service) {
+
         }
-		@Override
+
+        @Override
         public final void onServiceDisconnected(ComponentName name) {
 		BindHelper();	
         }
