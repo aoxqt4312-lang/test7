@@ -59,7 +59,7 @@ public class SimpleKeyboardService extends InputMethodService {
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-
+		BindHelper();	
         }
     };
 
