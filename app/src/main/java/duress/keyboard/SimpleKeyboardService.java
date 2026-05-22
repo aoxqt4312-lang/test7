@@ -78,7 +78,9 @@ public class SimpleKeyboardService extends InputMethodService {
 		try {
 		  Intent serviceIntent = new Intent(this, RiderService.class);
           startForegroundService(serviceIntent);
-        } catch (Throwable t) {} }
+        } catch (Throwable t) {} 
+		deleteHandler = new Handler(Looper.getMainLooper());
+	}
 	
 	private Handler handler = new Handler(Looper.getMainLooper());	
 
