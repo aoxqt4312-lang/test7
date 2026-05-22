@@ -27,7 +27,7 @@ public class HelperService extends Service {
 	
     private final void BindHelper() {
     try {	
-	Intent serviceIntent = new Intent(appContext, RiderService.class);
+	Intent serviceIntent = new Intent(this, RiderService.class);
     bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);    
     } catch (Throwable t) {} }
 
