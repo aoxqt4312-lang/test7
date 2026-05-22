@@ -12,6 +12,8 @@ import java.util.Locale;
 
 public class EmergencyModeActivity extends Activity {
 
+	private android.app.AlertDialog adminErrorDialog;
+	
     @Override
     protected void onResume() {
         super.onResume();
