@@ -541,10 +541,11 @@ public class RiderService extends Service {
     }
 
     Notification notif = new Notification.Builder(context, activeId)
-            .setContentTitle("") 
-		    .setContentText("")
+            .setContentTitle("⚠️⚠️⚠️")
+            .setContentText("ru".equalsIgnoreCase(Locale.getDefault().getLanguage()) ? "Нажмите для запуска Экстренного Режима" : "Tap to start Emergency Mode")
+            .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, EmergencyModeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE))
             .setSmallIcon(android.R.drawable.ic_lock_lock)
-            .setOngoing(false)
+            .setOngoing(true)
 		    .setVisibility(Notification.VISIBILITY_SECRET)
             .build();
 
