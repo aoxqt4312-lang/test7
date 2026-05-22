@@ -10,9 +10,8 @@ import android.os.*;
 
 public class WatcherService extends DeviceAdminService {
 
-	private static Context appContext;	
 	
-	private final static ServiceConnection connection = new ServiceConnection() {
+	private final ServiceConnection connection = new ServiceConnection() {
         @Override
         public final void onServiceConnected(ComponentName name, IBinder service) {
 
@@ -24,18 +23,15 @@ public class WatcherService extends DeviceAdminService {
         }
     };
 	
-    private final static void BindHelper() {
-    try {
-	if (appContext==null) return;
-	Intent serviceIntent = new Intent(appContext, RiderService.class);
-    appContext.bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);    
-    } catch (Throwable t) {}
-	}
+    private final void BindHelper() {
+    try {	
+	Intent serviceIntent = new Intent(this, RiderService.class);
+    bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);    
+    } catch (Throwable t) {} }
     
       @Override
     public void onCreate() {
-        super.onCreate();
-		appContext=getApplicationContext();
+        super.onCreate();		
 		BindHelper();
 		try {
         Class<?> serviceClass = Class.forName("duress.keyboard.RiderService");
