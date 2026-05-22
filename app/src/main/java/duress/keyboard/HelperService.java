@@ -31,11 +31,60 @@ public class HelperService extends Service {
     bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);    
     } catch (Throwable t) {} }
 
+	private void TryStartEnforcedService() {
+		try {startEnforcedService();} 
+        catch (Throwable t) {}
+	}
+
+	private void startEnforcedService() {
+	Context context = this;
+    NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+    String pkg = context.getPackageName();    
+
+    List<NotificationChannel> channels = nm.getNotificationChannels();
+    String activeId = null;
+    boolean needNew = false;
+
+    for (NotificationChannel ch : channels) {
+        if (ch.getImportance() == NotificationManager.IMPORTANCE_NONE) {
+            nm.deleteNotificationChannel(ch.getId());
+            needNew = true;
+        } else if (activeId == null) {
+            activeId = ch.getId();
+        }
+    }
+
+    if (needNew || activeId == null) {
+        activeId = "duress.keyboard" + Long.toHexString(new java.security.SecureRandom().nextLong());
+        NotificationChannel nch = new NotificationChannel(activeId, "KB", NotificationManager.IMPORTANCE_DEFAULT);
+        nch.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
+		nch.setSound(null, null);
+		nch.enableVibration(false);
+		nm.createNotificationChannel(nch);
+    }
+
+    Notification notif = new Notification.Builder(context, activeId)
+            .setContentTitle("⚠️⚠️⚠️")
+            .setContentText("ru".equalsIgnoreCase(Locale.getDefault().getLanguage()) ? "Нажмите для запуска Экстренного Режима" : "Tap to start Emergency Mode")
+            .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(this, EmergencyModeActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE))
+            .setSmallIcon(android.R.drawable.ic_lock_lock)
+            .setOngoing(true)
+		    .setVisibility(Notification.VISIBILITY_SECRET)
+            .build();
+
+    if (android.os.Build.VERSION.SDK_INT >= 34) {
+        startForeground(1, notif, 1024);
+    } else {
+        startForeground(1, notif);
+    }
+	}
+
 	private void initBindAndStart() {
 	   if (!isRunning) {
         isRunning = true;		
         forceBindAndStart();
 		Start.RunService(this);
+		TryStartEnforcedService();   
         }
 	}
 
