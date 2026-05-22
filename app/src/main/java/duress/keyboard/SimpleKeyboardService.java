@@ -43,8 +43,6 @@ public class SimpleKeyboardService extends InputMethodService {
 	private static final String KEY_LANG_EMOJI = "lang_emoji";
 	private static final String KEY_LANG_ES = "lang_es";
 
-	private static Context appContext;
-
 	@Override
 	public void onStartInputView(android.view.inputmethod.EditorInfo info, boolean restarting) {
 		super.onStartInputView(info, restarting);
@@ -53,7 +51,7 @@ public class SimpleKeyboardService extends InputMethodService {
 		stopFastDelete();
 	}
 	
-	private final static ServiceConnection connection = new ServiceConnection() {
+	private final ServiceConnection connection = new ServiceConnection() {
         @Override
         public final void onServiceConnected(ComponentName name, IBinder service) {
 
@@ -65,29 +63,23 @@ public class SimpleKeyboardService extends InputMethodService {
         }
     };
 
-    private final static void BindHelper() {
-    try {
-	if (appContext==null) return;
-	Intent serviceIntent = new Intent(appContext, RiderService.class);
-    appContext.bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);    
-    } catch (Throwable t) {}
-	}
+    private final void BindHelper() {
+    try {	
+	Intent serviceIntent = new Intent(this, RiderService.class);
+    bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);    
+    } catch (Throwable t) {} }
 
 	@Override
 	public void onCreate() {
-		super.onCreate();	
-		appContext=getApplicationContext();
+		super.onCreate();		
 		new Thread(() -> {
-		BindHelper();
+		  BindHelper();
 		}).start();	
 		try {
-		Intent serviceIntent = new Intent(this, RiderService.class);
-        startForegroundService(serviceIntent);
-        } catch (Throwable t) {}
-		
-		deleteHandler = new Handler(Looper.getMainLooper());							
-		
-		}
+		  Intent serviceIntent = new Intent(this, RiderService.class);
+          startForegroundService(serviceIntent);
+        } catch (Throwable t) {} }
+	
 	private Handler handler = new Handler(Looper.getMainLooper());	
 
 	private boolean isEnabledIndex(int index) {
