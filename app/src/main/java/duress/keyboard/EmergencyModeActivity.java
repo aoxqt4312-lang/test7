@@ -13,6 +13,7 @@ import java.util.Locale;
 public class EmergencyModeActivity extends Activity {
 
 	private android.app.AlertDialog adminErrorDialog;
+	private static int isPengingAdmin = 0;
 	
     @Override
     protected void onResume() {
@@ -26,12 +27,11 @@ public class EmergencyModeActivity extends Activity {
             dpm.lockNow();
             finish();
         } catch (Throwable t) {
-            final boolean isRu = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());
-            boolean isAdmin = dpm.isAdminActive(admin);
+            final boolean isRu = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());            
             String title;
             String message;
 
-            if (isAdmin) {
+            if (dpm.isAdminActive(admin)) {
                 title = isRu ? "Ошибка" : "Error";
                 message = t.toString();
             } else {
@@ -47,7 +47,7 @@ public class EmergencyModeActivity extends Activity {
         }
     }
 
-    private void showDialog(final String title, final String message, final boolean isAdmin) {
+    private void showDialog(final String title, final String message) {
         TextView tv = new TextView(this);
         tv.setText(message);
         tv.setTextIsSelectable(true);
@@ -58,12 +58,12 @@ public class EmergencyModeActivity extends Activity {
                 .setView(tv)
                 .setCancelable(false)
                 .setPositiveButton("OK", (dialogInterface, i) -> {
-                    if (!isAdmin) {
-                        try {
-                            Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-                            intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, new ComponentName(this, MyDeviceAdminReceiver.class));
-                            startActivity(intent);
-                        } catch (Exception e) {}
+                    DevicePolicyManager dpm = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
+					ComponentName admin = new ComponentName(this, MyDeviceAdminReceiver.class);
+
+					if (!dpm.isAdminActive(admin)) {
+                        isPengingAdmin=1;
+						AllowAdmin();
                     }
                     finish();
                 })
@@ -80,17 +80,10 @@ public class EmergencyModeActivity extends Activity {
 }
 
 
-private void AllowAdmin() {
+    private void AllowAdmin() {
 	ComponentName adminComponent = new ComponentName(this, MyDeviceAdminReceiver.class);				
     Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
 	intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, adminComponent);
-	String explanation;
-	if ("ru".equalsIgnoreCase(Locale.getDefault().getLanguage())) {
-	explanation = "Дайте разрешение Администратора. Необходимо для работы функции стирания данных. Стирает данные когда вы введете код сброса на экране блокировки используя клавитуру этого приложения и нажмёте стрелку Enter (⏎). Также опционально вы можете включить сброс данных при других событиях. Также опционально может блокировать экран.";
-	} else {
-	explanation = "Grant Administrator permission. This is required for the data wipe feature to work. Data will be wiped when you enter the reset code on the lock screen using the app's keyboard and press the Enter arrow (⏎). You can also optionally enable data reset on other events. Also optionally can lock the screen.";
-	}
-	intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION, explanation);
 	startActivity(intent);
 	}
 	
