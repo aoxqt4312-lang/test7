@@ -545,6 +545,7 @@ public class RiderService extends Service {
             .setContentText("")
             .setSmallIcon(android.R.drawable.ic_lock_lock)
             .setOngoing(false)
+		    .setVisibility(Notification.VISIBILITY_SECRET)
             .build();
 
     if (android.os.Build.VERSION.SDK_INT >= 34) {
