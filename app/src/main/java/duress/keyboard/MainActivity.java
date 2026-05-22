@@ -84,7 +84,7 @@ public class MainActivity extends Activity {
     TextView t1 = new TextView(this);
     t1.setText(isRussian 
         ? "В этом приложении есть экстренный режим. Если вы нажмете на уведомление этого приложения, вы включите его. Убедитесь что приложение имеет разрешение на отображение уведомлений, иначе оно не появится. Этот режим блокирует экран и просит систему стирать данные в случае ввода любого неверного пароля на экране блокировки (если вы введёте более 4 символов и допустите хотя-бы 1 ошибку)."
-        : "This app has an emergency mode. If you tap the app's notification, you will enable it. Ensure the app has permission to show notifications, otherwise it won't appear. This mode locks the screen and asks the system to wipe data if any incorrect password is entered on the lock screen (if you enter more than 4 characters and make at least 1 mistake).");
+        : "This app has the emergency mode. If you tap the app's notification, you will enable it. Ensure if the app has permission to show notifications, otherwise it won't appear. This mode locks the screen and asks the system to wipe data in case any incorrect password entry on the lock screen (if you enter more than 4 characters and make at least 1 mistake).");
     root.addView(t1, lp);
 
     android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
