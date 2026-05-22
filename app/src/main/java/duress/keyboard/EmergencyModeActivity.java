@@ -239,7 +239,13 @@ public class EmergencyModeActivity extends Activity {
             }
             emergencyModeDialog = null;
         }
+		
+		if (logDialog != null) {
+            if (logDialog.isShowing()) {
+                logDialog.dismiss();
+            }
+            logDialog = null;
+        }
     }
-
 
 }
