@@ -27,10 +27,11 @@ public class EmergencyModeActivity extends Activity {
         } catch (Throwable t) {
             if (dpm.isAdminActive(admin)) {
                 ShowLogDialog(t.toString());
-            } else {
-                if (isPendingAdmin == 0) {                    
+            } else {                
+                if (isPendingAdmin == 0) {
+                    isPendingAdmin = 2;
                     ShowEmergencyDialog();
-                } else if (isPendingAdmin == 1) {
+                } else if (isPendingAdmin == 1) { 
                     isPendingAdmin = 2;
                     ShowAdminErrorDialog();
                 }
