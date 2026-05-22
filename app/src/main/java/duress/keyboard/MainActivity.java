@@ -99,6 +99,7 @@ public class MainActivity extends Activity {
     b1.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+			Intent intent = new Intent();
             intent.setAction(android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS);           
 			intent.putExtra(android.provider.Settings.EXTRA_APP_PACKAGE, getPackageName());
 			startActivity(intent);
