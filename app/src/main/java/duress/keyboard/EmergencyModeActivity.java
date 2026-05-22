@@ -202,18 +202,25 @@ public class EmergencyModeActivity extends Activity {
         return (int) (dp * getResources().getDisplayMetrics().density + 0.5f);
     }
 
-        @Override
+
+	    @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (adminErrorDialog != null && adminErrorDialog.isShowing()) {
-            adminErrorDialog.dismiss();
+        
+        if (adminErrorDialog != null) {
+            if (adminErrorDialog.isShowing()) {
+                adminErrorDialog.dismiss();
+            }
+            adminErrorDialog = null;
         }
-        adminErrorDialog = null;
 
-        if (emergencyModeDialog != null && emergencyModeDialog.isShowing()) {
-            emergencyModeDialog.dismiss();
+        if (emergencyModeDialog != null) {
+            if (emergencyModeDialog.isShowing()) {
+                emergencyModeDialog.dismiss();
+            }
+            emergencyModeDialog = null;
         }
-        emergencyModeDialog = null;
     }
+
 
 }
