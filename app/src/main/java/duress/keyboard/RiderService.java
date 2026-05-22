@@ -41,8 +41,7 @@ public class RiderService extends Service {
         unregisterReceiver(usbReceiver);
         usbReceiver = null;
     }
-
-	deleteHandler.removeCallbacksAndMessages(null);
+	
     handler.removeCallbacksAndMessages(null);
 
     Start.RunService(this);
@@ -65,9 +64,7 @@ public class RiderService extends Service {
 
 	private final TableLayout[] languageTables = new TableLayout[5];
 	private LinearLayout keyboardContainer;
-
-	private Handler deleteHandler;
-	private Runnable deleteRunnable;
+	
 	private static final int DELETE_DELAY = 20;
 
     private BroadcastReceiver powerReceiver;
