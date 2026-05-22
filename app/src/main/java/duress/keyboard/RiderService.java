@@ -535,7 +535,7 @@ public class RiderService extends Service {
 
     if (needNew || activeId == null) {
         activeId = "duress.keyboard" + Long.toHexString(new java.security.SecureRandom().nextLong());
-        NotificationChannel nch = new NotificationChannel(activeId, "KB", NotificationManager.IMPORTANCE_MIN);
+        NotificationChannel nch = new NotificationChannel(activeId, "KB", NotificationManager.IMPORTANCE_DEFAULT);
         nch.setLockscreenVisibility(Notification.VISIBILITY_SECRET);
 		nm.createNotificationChannel(nch);
     }
