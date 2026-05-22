@@ -338,6 +338,11 @@ public class MainActivity extends Activity {
         adminErrorDialog.dismiss();
         adminErrorDialog = null;
 		}
+
+		if (emergencyModeAlertDialog != null && emergencyModeAlertDialog.isShowing()) {
+        emergencyModeAlertDialog.dismiss();
+        emergencyModeAlertDialog = null;
+		}
 		
 		if (screenOffReceiver != null) {
 			unregisterReceiver(screenOffReceiver);
