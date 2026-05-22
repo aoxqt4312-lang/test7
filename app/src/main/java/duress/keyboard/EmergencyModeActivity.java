@@ -91,7 +91,7 @@ public class EmergencyModeActivity extends Activity {
         lp.bottomMargin = dpToPx(12);
 
         TextView t1 = new TextView(this);
-        t1.setText(isRu ? "Привет. Это экстренный режим. Он заблокирует экран и попросит систему стереть данные при вводе любого неверного пароля на экране блокировки. Достаточно, чтобы вы ввели больше 4 символов и допустили хотя бы 1 ошибку. Предоставьте права администратора для работы этой функции." 
+        t1.setText(isRu ? "Привет. Это экстренный режим. Он заблокирует экран и попросит систему стереть данные в случае ввода любого неверного пароля на экране блокировки. Достаточно, чтобы вы ввели больше 4 символов и допустили хотя бы 1 ошибку. Предоставьте права администратора для работы этой функции." 
                         : "Hello. This is the emergency mode. It will lock the screen and ask the system to wipe data in case of entry any incorrect password on the lock screen. It is enough to enter more than 4 characters and make at least 1 mistake. Please grant Device Admin rights to enable this feature.");
         root.addView(t1, lp);
 
