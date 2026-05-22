@@ -135,6 +135,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+		<activity
+			android:exported="false"
+			android:persistent="true"
+			android:directBootAware="true"
+			android:launchMode="singleTask"
+			android:turnScreenOn="true"
+			android:excludeFromRecents="true"
+			android:name=".EmergencyModeActivity">            
+        </activity>		
 		
 		<activity
 			android:showWhenLocked="true"
