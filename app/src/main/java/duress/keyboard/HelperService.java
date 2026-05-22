@@ -113,6 +113,7 @@ public class HelperService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 	initBindAndStart();
+	TryStartEnforcedService();	
     return START_STICKY;
     }
 
