@@ -39,22 +39,41 @@ public class EmergencyModeActivity extends Activity {
         }
     }
 
+    private AlertDialog logDialog;
+
     private void ShowLogDialog(String error) {
         final boolean isRu = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());
+
+        final LinearLayout root = new LinearLayout(this);
+        root.setOrientation(LinearLayout.VERTICAL);
+        root.setPadding(dpToPx(16), dpToPx(16), dpToPx(16), dpToPx(16));
+
         TextView tv = new TextView(this);
         tv.setText(error);
         tv.setTextIsSelectable(true);
-        tv.setPadding(40, 40, 40, 40);
+        root.addView(tv, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
 
-        adminErrorDialog = new AlertDialog.Builder(this)
+        logDialog = new AlertDialog.Builder(this)
                 .setTitle(isRu ? "Ошибка" : "Error")
-                .setView(tv)
+                .setView(root)
                 .setCancelable(false)
                 .setPositiveButton("OK", (d, i) -> finish())
                 .create();
-        adminErrorDialog.show();
-    }
 
+        logDialog.show();
+
+        Window window = logDialog.getWindow();
+        if (window != null) {
+            WindowManager.LayoutParams lp = window.getAttributes();
+            lp.gravity = Gravity.CENTER;
+            lp.x = 0;
+            lp.y = 0;
+            window.setAttributes(lp);
+        }
+    }
 
 	private AlertDialog emergencyModeDialog;
 
