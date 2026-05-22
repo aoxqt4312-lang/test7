@@ -33,8 +33,6 @@ public class EmergencyModeActivity extends Activity {
                 } else if (isPendingAdmin == 1) {
                     isPendingAdmin = 2;
                     ShowAdminErrorDialog();
-                } else {
-                    finish();
                 }
             }
         }
@@ -68,8 +66,7 @@ public class EmergencyModeActivity extends Activity {
                 .setCancelable(false)
                 .setPositiveButton("OK", (d, i) -> {
                     isPendingAdmin = 1;
-                    AllowAdmin();
-                    finish();
+                    AllowAdmin();                
                 })
                 .create();
         adminErrorDialog.show();
