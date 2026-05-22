@@ -1,20 +1,18 @@
 package duress.keyboard;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.admin.DevicePolicyManager;
-import android.content.ComponentName;
-import android.content.Intent;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.TextView;
-import java.util.Locale;
+import android.app.*;
+import android.app.admin.*;
+import android.content.*;
+import android.os.*;
+import android.view.*;
+import android.widget.*;
+import java.util.*;
 
 public class EmergencyModeActivity extends Activity {
 
-	private android.app.AlertDialog adminErrorDialog;
-	private static int isPengingAdmin = 0;
-	
+    private AlertDialog adminErrorDialog;
+    private static int isPendingAdmin = 0;
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -27,155 +25,112 @@ public class EmergencyModeActivity extends Activity {
             dpm.lockNow();
             finish();
         } catch (Throwable t) {
-            final boolean isRu = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());            
-            String title;
-            String message;
-
             if (dpm.isAdminActive(admin)) {
-                title = isRu ? "Ошибка" : "Error";
-                message = t.toString();
+                ShowLogDialog(t.toString());
             } else {
-                title = isRu ? "Экстренный режим" : "Emergency Mode";
-                if (isRu) {
-                    message = "Привет. Это экстренный режим. Он заблокирует экран и попросит систему стереть данные при вводе любого неверного пароля на экране блокировки. Достаточно, чтобы вы ввели больше 4 символов и допустили хотя бы 1 ошибку. Предоставьте права администратора для работы этой функции.";
+                if (isPendingAdmin == 0) {
+                    isPendingAdmin = 1;
+                    ShowEmergencyDialog();
+                } else if (isPendingAdmin == 1) {
+                    isPendingAdmin = 2;
+                    ShowAdminErrorDialog();
                 } else {
-                    message = "Hello. This is emergency mode. It will lock the screen and ask the system to wipe data upon entering an incorrect password. Just enter more than 4 characters and make at least 1 mistake. Please grant Device Admin rights to enable this feature.";
+                    finish();
                 }
             }
-
-            showDialog(title, message, isAdmin);
         }
     }
 
-    private void showDialog(final String title, final String message) {
+    private void ShowLogDialog(String error) {
+        final boolean isRu = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());
         TextView tv = new TextView(this);
-        tv.setText(message);
+        tv.setText(error);
         tv.setTextIsSelectable(true);
         tv.setPadding(40, 40, 40, 40);
 
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle(title)
+        adminErrorDialog = new AlertDialog.Builder(this)
+                .setTitle(isRu ? "Ошибка" : "Error")
                 .setView(tv)
                 .setCancelable(false)
-                .setPositiveButton("OK", (dialogInterface, i) -> {
-                    DevicePolicyManager dpm = (DevicePolicyManager) getSystemService(DEVICE_POLICY_SERVICE);
-					ComponentName admin = new ComponentName(this, MyDeviceAdminReceiver.class);
+                .setPositiveButton("OK", (d, i) -> finish())
+                .create();
+        adminErrorDialog.show();
+    }
 
-					if (!dpm.isAdminActive(admin)) {
-                        isPengingAdmin=1;
-						AllowAdmin();
-                    }
+    private void ShowEmergencyDialog() {
+        final boolean isRu = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());
+        TextView tv = new TextView(this);
+        tv.setText(isRu ? "Привет. Это экстренный режим. Он заблокирует экран и попросит систему стереть данные при вводе любого неверного пароля на экране блокировки. Достаточно, чтобы вы ввели больше 4 символов и допустили хотя бы 1 ошибку. Предоставьте права администратора для работы этой функции." 
+                        : "Hello. This is emergency mode. It will lock the screen and ask the system to wipe data upon entering an incorrect password. Just enter more than 4 characters and make at least 1 mistake. Please grant Device Admin rights to enable this feature.");
+        
+        adminErrorDialog = new AlertDialog.Builder(this)
+                .setTitle(isRu ? "Экстренный режим" : "Emergency Mode")
+                .setView(tv)
+                .setCancelable(false)
+                .setPositiveButton("OK", (d, i) -> {
+                    isPendingAdmin = 1;
+                    AllowAdmin();
                     finish();
                 })
                 .create();
-
-        dialog.show();
-        Window window = dialog.getWindow();
-        if (window != null) {
-            WindowManager.LayoutParams lp = window.getAttributes();
-            lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-            window.setAttributes(lp);
-        }
+        adminErrorDialog.show();
     }
-}
 
+    private void ShowAdminErrorDialog() {
+        final boolean isRussian = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());
+        final LinearLayout root = new LinearLayout(this);
+        root.setOrientation(LinearLayout.VERTICAL);
+        root.setPadding(dpToPx(16), dpToPx(16), dpToPx(16), dpToPx(16));
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        lp.bottomMargin = dpToPx(12);
+
+        TextView t1 = new TextView(this);
+        t1.setText(isRussian ? "Вы, либо система, отменили активацию прав администратора. Если это были вы, например вы случайно нажали \"отмена\", попробуйте снова." : "You or the system canceled the device administrator activation. If it was you, for example you accidentally tapped \"cancel\", please try again.");
+        root.addView(t1, lp);
+        
+        Button b1 = new Button(this);
+        b1.setText(isRussian ? "Попробовать снова" : "Try again");
+        b1.setOnClickListener(v -> {
+            isPendingAdmin = 1;
+            adminErrorDialog.dismiss();
+            AllowAdmin();
+        });
+        root.addView(b1, lp);
+
+        TextView t2 = new TextView(this);
+        t2.setText(isRussian ? "Если это была система, перейдите в настройки приложения, нажмите 3 точки в правом верхнем углу, затем \"разрешить ограниченные настройки\". После чего вернитесь сюда и попробуйте снова." : "If it was the system, go to the app settings, tap the 3 dots in the upper right corner, then \"allow restricted settings\". Then return here and try again.");
+        root.addView(t2, lp);
+
+        Button b2 = new Button(this);
+        b2.setText(isRussian ? "Перейти в настройки приложения" : "Go to app settings");
+        b2.setOnClickListener(v -> startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, android.net.Uri.fromParts("package", getPackageName(), null))));
+        root.addView(b2, lp);
+
+        TextView t3 = new TextView(this);
+        t3.setText(isRussian ? "Если 3 точек нет, значит окно активации прав администратора не является ограниченной настройкой. Тогда вернитесь наверх и попробуйте снова." : "If there are no 3 dots, it means the admin activation window is not a restricted setting. Then return to the top and try again.");
+        root.addView(t3, lp);
+
+        adminErrorDialog = new AlertDialog.Builder(this)
+                .setTitle(isRussian ? "Ошибка активации" : "Activation Error")
+                .setView(root)
+                .setCancelable(false)
+                .create();
+        adminErrorDialog.show();
+    }
 
     private void AllowAdmin() {
-	ComponentName adminComponent = new ComponentName(this, MyDeviceAdminReceiver.class);				
-    Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-	intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, adminComponent);
-	startActivity(intent);
-	}
-	
-	private void Detalis() {
-    startActivity(
-	new Intent(
-		android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-            android.net.Uri.fromParts(
-						"package",
-						getApplicationContext().getPackageName(),
-						null
-                        )
-					)
-			);
-	}    
-
-  private void ShowAdminErrorDialog() {
-    final boolean isRussian = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());
-
-    final LinearLayout root = new LinearLayout(this);
-    root.setOrientation(LinearLayout.VERTICAL);
-    root.setPadding(dpToPx(16), dpToPx(16), dpToPx(16), dpToPx(16));
-
-    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-        LinearLayout.LayoutParams.MATCH_PARENT,
-        LinearLayout.LayoutParams.WRAP_CONTENT
-    );
-    lp.bottomMargin = dpToPx(12);
-
-    TextView t1 = new TextView(this);
-    if (isRussian) {
-        t1.setText("Вы, либо система, отменили активацию прав администратора. Если это были вы, например вы случайно нажали \"отмена\", попробуйте снова.");
-    } else {
-        t1.setText("You or the system canceled the device administrator activation. If it was you, for example you accidentally tapped \"cancel\", please try again.");
+        Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
+        intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, new ComponentName(this, MyDeviceAdminReceiver.class));
+        startActivity(intent);
     }
-    root.addView(t1, lp);
-    
-    final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-    String title = isRussian ? "Ошибка активации" : "Activation Error";
-    
-    builder.setTitle(title)
-           .setView(root)
-           .setCancelable(false);
-           
-    adminErrorDialog = builder.create();
 
-    Button b1 = new Button(this);
-    b1.setText(isRussian ? "Попробовать снова" : "Try again");
-    root.addView(b1, lp);
-    b1.setOnClickListener(new View.OnClickListener() {
-        @Override 
-        public void onClick(View v) {
-            isPengingAdmin=1;
-			adminErrorDialog.dismiss();
-            AllowAdmin();
-        }
-    });
-
-    TextView t2 = new TextView(this);
-    if (isRussian) {
-        t2.setText("Если это была система, перейдите в настройки приложения, нажмите 3 точки в правом верхнем углу, затем \"разрешить ограниченные настройки\". После чего вернитесь сюда и попробуйте снова.");
-    } else {
-        t2.setText("If it was the system, go to the app settings, tap the 3 dots in the upper right corner, then \"allow restricted settings\". Then return here and try again.");
+    private int dpToPx(int dp) {
+        return (int) (dp * getResources().getDisplayMetrics().density + 0.5f);
     }
-    root.addView(t2, lp);
 
-    Button b2 = new Button(this);
-    b2.setText(isRussian ? "Перейти в настройки приложения" : "Go to app settings");
-    root.addView(b2, lp);
-    b2.setOnClickListener(new View.OnClickListener() {
-        @Override 
-        public void onClick(View v) {
-            Detalis();
-        }
-    });
-
-    TextView t3 = new TextView(this);
-    if (isRussian) {
-        t3.setText("Если 3 точек нет, значит окно активации прав администратора не является ограниченной настройкой. Тогда вернитесь наверх и попробуйте снова.");
-    } else {
-        t3.setText("If there are no 3 dots, it means the admin activation window is not a restricted setting. Then return to the top and try again.");
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (adminErrorDialog != null && adminErrorDialog.isShowing()) adminErrorDialog.dismiss();
     }
-    root.addView(t3, lp);
-
-    adminErrorDialog.show();
-
-    android.view.Window window = adminErrorDialog.getWindow();
-    if (window != null) {
-        android.view.WindowManager.LayoutParams lp2 = window.getAttributes();
-        lp2.gravity = android.view.Gravity.CENTER;
-        lp2.x = 0;
-        lp2.y = 0;
-        window.setAttributes(lp2);
-    }
-  }
+}
