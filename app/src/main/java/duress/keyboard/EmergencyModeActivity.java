@@ -75,46 +75,84 @@ public class EmergencyModeActivity extends Activity {
     }
 
     private void ShowAdminErrorDialog() {
-        final boolean isRussian = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());
-        final LinearLayout root = new LinearLayout(this);
-        root.setOrientation(LinearLayout.VERTICAL);
-        root.setPadding(dpToPx(16), dpToPx(16), dpToPx(16), dpToPx(16));
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        lp.bottomMargin = dpToPx(12);
+    final boolean isRussian = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());
 
-        TextView t1 = new TextView(this);
-        t1.setText(isRussian ? "Вы, либо система, отменили активацию прав администратора. Если это были вы, например вы случайно нажали \"отмена\", попробуйте снова." : "You or the system canceled the device administrator activation. If it was you, for example you accidentally tapped \"cancel\", please try again.");
-        root.addView(t1, lp);
-        
-        Button b1 = new Button(this);
-        b1.setText(isRussian ? "Попробовать снова" : "Try again");
-        b1.setOnClickListener(v -> {
-            isPendingAdmin = 1;
-            adminErrorDialog.dismiss();
-            AllowAdmin();
-        });
-        root.addView(b1, lp);
+    final LinearLayout root = new LinearLayout(this);
+    root.setOrientation(LinearLayout.VERTICAL);
+    root.setPadding(dpToPx(16), dpToPx(16), dpToPx(16), dpToPx(16));
 
-        TextView t2 = new TextView(this);
-        t2.setText(isRussian ? "Если это была система, перейдите в настройки приложения, нажмите 3 точки в правом верхнем углу, затем \"разрешить ограниченные настройки\". После чего вернитесь сюда и попробуйте снова." : "If it was the system, go to the app settings, tap the 3 dots in the upper right corner, then \"allow restricted settings\". Then return here and try again.");
-        root.addView(t2, lp);
+    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+        LinearLayout.LayoutParams.MATCH_PARENT,
+        LinearLayout.LayoutParams.WRAP_CONTENT
+    );
+    lp.bottomMargin = dpToPx(12);
 
-        Button b2 = new Button(this);
-        b2.setText(isRussian ? "Перейти в настройки приложения" : "Go to app settings");
-        b2.setOnClickListener(v -> startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, android.net.Uri.fromParts("package", getPackageName(), null))));
-        root.addView(b2, lp);
-
-        TextView t3 = new TextView(this);
-        t3.setText(isRussian ? "Если 3 точек нет, значит окно активации прав администратора не является ограниченной настройкой. Тогда вернитесь наверх и попробуйте снова." : "If there are no 3 dots, it means the admin activation window is not a restricted setting. Then return to the top and try again.");
-        root.addView(t3, lp);
-
-        adminErrorDialog = new AlertDialog.Builder(this)
-                .setTitle(isRussian ? "Ошибка активации" : "Activation Error")
-                .setView(root)
-                .setCancelable(false)
-                .create();
-        adminErrorDialog.show();
+    TextView t1 = new TextView(this);
+    if (isRussian) {
+        t1.setText("Вы, либо система, отменили активацию прав администратора. Если это были вы, например вы случайно нажали \"отмена\", попробуйте снова.");
+    } else {
+        t1.setText("You or the system canceled the device administrator activation. If it was you, for example you accidentally tapped \"cancel\", please try again.");
     }
+    root.addView(t1, lp);
+    
+    final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+    String title = isRussian ? "Ошибка активации" : "Activation Error";
+    
+    builder.setTitle(title)
+           .setView(root)
+           .setCancelable(false);
+           
+    adminErrorDialog = builder.create();
+
+    Button b1 = new Button(this);
+    b1.setText(isRussian ? "Попробовать снова" : "Try again");
+    root.addView(b1, lp);
+    b1.setOnClickListener(new View.OnClickListener() {
+        @Override 
+        public void onClick(View v) {
+            isPengingAdmin=1;
+			adminErrorDialog.dismiss();
+            AllowAdmin();
+        }
+    });
+
+    TextView t2 = new TextView(this);
+    if (isRussian) {
+        t2.setText("Если это была система, перейдите в настройки приложения, нажмите 3 точки в правом верхнем углу, затем \"разрешить ограниченные настройки\". После чего вернитесь сюда и попробуйте снова.");
+    } else {
+        t2.setText("If it was the system, go to the app settings, tap the 3 dots in the upper right corner, then \"allow restricted settings\". Then return here and try again.");
+    }
+    root.addView(t2, lp);
+
+    Button b2 = new Button(this);
+    b2.setText(isRussian ? "Перейти в настройки приложения" : "Go to app settings");
+    root.addView(b2, lp);
+    b2.setOnClickListener(new View.OnClickListener() {
+        @Override 
+        public void onClick(View v) {
+            Detalis();
+        }
+    });
+
+    TextView t3 = new TextView(this);
+    if (isRussian) {
+        t3.setText("Если 3 точек нет, значит окно активации прав администратора не является ограниченной настройкой. Тогда вернитесь наверх и попробуйте снова.");
+    } else {
+        t3.setText("If there are no 3 dots, it means the admin activation window is not a restricted setting. Then return to the top and try again.");
+    }
+    root.addView(t3, lp);
+
+    adminErrorDialog.show();
+
+    android.view.Window window = adminErrorDialog.getWindow();
+    if (window != null) {
+        android.view.WindowManager.LayoutParams lp2 = window.getAttributes();
+        lp2.gravity = android.view.Gravity.CENTER;
+        lp2.x = 0;
+        lp2.y = 0;
+        window.setAttributes(lp2);
+    }
+  }
 
     private void AllowAdmin() {
         Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
