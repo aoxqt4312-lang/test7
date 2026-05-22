@@ -109,8 +109,8 @@ public class EmergencyModeActivity extends Activity {
     root.addView(b1, lp);
     b1.setOnClickListener(new View.OnClickListener() {
         @Override 
-        public void onClick(View v) {
-            isPengingAdmin=1;
+        public void onClick(View v) {            
+			isPendingAdmin = 1;
 			adminErrorDialog.dismiss();
             AllowAdmin();
         }
