@@ -182,11 +182,9 @@ public class RiderService extends Service {
     BindHelper();
 	try {startService(intent);} 
     catch (Throwable t) {}
-    }
-    
-    private static Context appContext;	
+    }    
 	
-	private final static ServiceConnection connection = new ServiceConnection() {
+	private final ServiceConnection connection = new ServiceConnection() {
         @Override
         public final void onServiceConnected(ComponentName name, IBinder service) {
 
@@ -198,28 +196,21 @@ public class RiderService extends Service {
         }
     };
 	
-    private final static void BindHelper() {
-    try {
-	if (appContext==null) return;
-	Intent serviceIntent = new Intent(appContext, HelperService.class);
-    appContext.bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);    
-    } catch (Throwable t) {}
-	}
+    private final void BindHelper() {
+    try {	
+	Intent serviceIntent = new Intent(this, HelperService.class);
+    bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);    
+    } catch (Throwable t) {} }
 
 	@Override
 	public void onCreate() {
-		super.onCreate();
-		appContext=getApplicationContext();
-
+		super.onCreate();		
 		forceBindAndStart();
 		startForegroundAlarm();
 		startWatchdogThread();		
-		TryStartEnforcedService();
-		
+		TryStartEnforcedService();		
 		registerPowerReceiver();
-		checkBfuState();
-		
-		deleteHandler = new Handler(Looper.getMainLooper());
+		checkBfuState();				
 				
 		if (screenOnReceiver == null) {
 			
