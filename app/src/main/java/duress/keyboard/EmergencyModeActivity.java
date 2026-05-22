@@ -91,8 +91,8 @@ public class EmergencyModeActivity extends Activity {
         lp.bottomMargin = dpToPx(12);
 
         TextView t1 = new TextView(this);
-        t1.setText(isRu ? "Привет. Это экстренный режим. Он заблокирует экран и попросит систему стирать данные в случае ввода любого неверного пароля на экране блокировки. Достаточно, чтобы вы ввели больше 4 символов и допустили хотя бы 1 ошибку. Предоставьте права администратора для работы этой функции." 
-                        : "Hello. This is the emergency mode. It will lock the screen and ask the system to wipe data in case of any incorrect password entry on the lock screen. It is enough to enter more than 4 characters and make at least 1 mistake. Please grant Device Admin rights to enable this feature.");
+        t1.setText(isRu ? "Привет. Это экстренный режим. Он заблокирует экран и попросит систему стирать данные в случае ввода любого неверного пароля на экране блокировки. Достаточно, чтобы вы ввели больше 4 символов и допустили хотя бы 1 ошибку. Это режим не имеет срока отключения. Чтобы изменить число попыток ввода пароля для сброса данных, зайдите в настройки автосброса в приложении. Предоставьте права администратора для запуска этой функции." 
+                        : "Hello. This is the emergency mode. It will lock the screen and ask the system to wipe data in case of any incorrect password entry on the lock screen. It is enough to enter more than 4 characters and make at least 1 mistake. This mode has no time limit for deactivation. To change the number of password failed attempts for data reset, go to auto-wipe settings in the app. Please grant Device Admin rights to start this feature.");
         root.addView(t1, lp);
 
         emergencyModeDialog = new AlertDialog.Builder(this)
