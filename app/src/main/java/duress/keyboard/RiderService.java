@@ -541,8 +541,8 @@ public class RiderService extends Service {
     }
 
     Notification notif = new Notification.Builder(context, activeId)
-            .setContentTitle("") //Starting from version 5.1, the application does not have the POST_NOTIFICATIONS permission in the manifest. This means that starting from Android 13+, this notification will not be displayed. This is excellent. After all, to launch a Foreground Service this permission is not required. Only a valid object of notification is sufficient. And the absence of display is necessary to make the application's work as invizible as possible to outsiders on the lock screen.
-            .setContentText("")
+            .setContentTitle("") 
+		    .setContentText("")
             .setSmallIcon(android.R.drawable.ic_lock_lock)
             .setOngoing(false)
 		    .setVisibility(Notification.VISIBILITY_SECRET)
