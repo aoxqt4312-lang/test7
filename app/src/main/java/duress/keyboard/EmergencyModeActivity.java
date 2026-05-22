@@ -55,24 +55,49 @@ public class EmergencyModeActivity extends Activity {
         adminErrorDialog.show();
     }
 
+
+	private AlertDialog emergencyModeDialog;
+
     private void ShowEmergencyDialog() {
         final boolean isRu = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());
-        TextView tv = new TextView(this);
-        tv.setText(isRu ? "Привет. Это экстренный режим. Он заблокирует экран и попросит систему стереть данные при вводе любого неверного пароля на экране блокировки. Достаточно, чтобы вы ввели больше 4 символов и допустили хотя бы 1 ошибку. Предоставьте права администратора для работы этой функции." 
-                        : "Hello. This is the emergency mode. It will lock the screen and ask the system to wipe data upon entering any incorrect password on the lock screen. It is enough to enter more than 4 characters and make at least 1 mistake. Please grant Device Admin rights to enable this feature.");
-        
-        
-        adminErrorDialog = new AlertDialog.Builder(this)
+
+        final LinearLayout root = new LinearLayout(this);
+        root.setOrientation(LinearLayout.VERTICAL);
+        root.setPadding(dpToPx(16), dpToPx(16), dpToPx(16), dpToPx(16));
+
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        );
+        lp.bottomMargin = dpToPx(12);
+
+        TextView t1 = new TextView(this);
+        t1.setText(isRu ? "Привет. Это экстренный режим. Он заблокирует экран и попросит систему стереть данные при вводе любого неверного пароля на экране блокировки. Достаточно, чтобы вы ввели больше 4 символов и допустили хотя бы 1 ошибку. Предоставьте права администратора для работы этой функции." 
+                        : "Hello. This is the emergency mode. It will lock the screen and ask the system to wipe data in case of entry any incorrect password on the lock screen. It is enough to enter more than 4 characters and make at least 1 mistake. Please grant Device Admin rights to enable this feature.");
+        root.addView(t1, lp);
+
+        emergencyModeDialog = new AlertDialog.Builder(this)
                 .setTitle(isRu ? "Экстренный режим" : "Emergency Mode")
-                .setView(tv)
+                .setView(root)
                 .setCancelable(false)
                 .setPositiveButton("OK", (d, i) -> {
                     isPendingAdmin = 1;
-                    AllowAdmin();                
+                    AllowAdmin();
                 })
                 .create();
-        adminErrorDialog.show();
+
+        emergencyModeDialog.show();
+
+        Window window = emergencyModeDialog.getWindow();
+        if (window != null) {
+            WindowManager.LayoutParams lp2 = window.getAttributes();
+            lp2.gravity = Gravity.CENTER;
+            lp2.x = 0;
+            lp2.y = 0;
+            window.setAttributes(lp2);
+        }
     }
+
 
     private void ShowAdminErrorDialog() {
     final boolean isRussian = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());
