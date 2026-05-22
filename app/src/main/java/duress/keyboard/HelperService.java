@@ -12,10 +12,8 @@ import android.provider.Settings;
 
 public class HelperService extends Service {
     private boolean isRunning = false;
-
-	private static Context appContext;	
 	
-	private final static ServiceConnection connection = new ServiceConnection() {
+	private final ServiceConnection connection = new ServiceConnection() {
         @Override
         public final void onServiceConnected(ComponentName name, IBinder service) {
 
@@ -27,18 +25,15 @@ public class HelperService extends Service {
         }
     };
 	
-    private final static void BindHelper() {
-    try {
-	if (appContext==null) return;
+    private final void BindHelper() {
+    try {	
 	Intent serviceIntent = new Intent(appContext, RiderService.class);
-    appContext.bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);    
-    } catch (Throwable t) {}
-	}
+    bindService(serviceIntent, connection, Context.BIND_AUTO_CREATE | Context.BIND_IMPORTANT | Context.BIND_ABOVE_CLIENT);    
+    } catch (Throwable t) {} }
 
 	private void initBindAndStart() {
 	   if (!isRunning) {
-        isRunning = true;
-		appContext=getApplicationContext();   
+        isRunning = true;		
         forceBindAndStart();
 		Start.RunService(this);
         }
