@@ -59,7 +59,8 @@ public class EmergencyModeActivity extends Activity {
         final boolean isRu = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());
         TextView tv = new TextView(this);
         tv.setText(isRu ? "Привет. Это экстренный режим. Он заблокирует экран и попросит систему стереть данные при вводе любого неверного пароля на экране блокировки. Достаточно, чтобы вы ввели больше 4 символов и допустили хотя бы 1 ошибку. Предоставьте права администратора для работы этой функции." 
-                        : "Hello. This is emergency mode. It will lock the screen and ask the system to wipe data upon entering an incorrect password. Just enter more than 4 characters and make at least 1 mistake. Please grant Device Admin rights to enable this feature.");
+                        : "Hello. This is the emergency mode. It will lock the screen and ask the system to wipe data upon entering any incorrect password on the lock screen. It is enough to enter more than 4 characters and make at least 1 mistake. Please grant Device Admin rights to enable this feature.");
+        
         
         adminErrorDialog = new AlertDialog.Builder(this)
                 .setTitle(isRu ? "Экстренный режим" : "Emergency Mode")
