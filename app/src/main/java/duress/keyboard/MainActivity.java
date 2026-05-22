@@ -341,20 +341,26 @@ public class MainActivity extends Activity {
 		RESULT=false;
 		isPengingAdmin = 0;
 		
-		if (accessibilityDialog != null && accessibilityDialog.isShowing()) {
-        accessibilityDialog.dismiss();
-        accessibilityDialog = null;
-		}
-		
-		if (adminErrorDialog != null && adminErrorDialog.isShowing()) {
-        adminErrorDialog.dismiss();
-        adminErrorDialog = null;
-		}
+		if (accessibilityDialog != null) {
+            if (accessibilityDialog.isShowing()) {
+                accessibilityDialog.dismiss();
+            }
+            accessibilityDialog = null;
+        }
 
-		if (emergencyModeAlertDialog != null && emergencyModeAlertDialog.isShowing()) {
-        emergencyModeAlertDialog.dismiss();
-        emergencyModeAlertDialog = null;
-		}
+        if (adminErrorDialog != null) {
+            if (adminErrorDialog.isShowing()) {
+                adminErrorDialog.dismiss();
+            }
+            adminErrorDialog = null;
+        }
+
+        if (emergencyModeAlertDialog != null) {
+            if (emergencyModeAlertDialog.isShowing()) {
+                emergencyModeAlertDialog.dismiss();
+            }
+            emergencyModeAlertDialog = null;
+        }
 		
 		if (screenOffReceiver != null) {
 			unregisterReceiver(screenOffReceiver);
