@@ -60,24 +60,24 @@ public class MainActivity extends Activity {
 
 	private static android.app.AlertDialog emergencyModeAlertDialog;
 
-	private void showEmergencyModeAlertDialog() {    
+	private void showEmergencyModeAlertDialog() {
+    if (emergencyModeAlertDialog != null && emergencyModeAlertDialog.isShowing()) return;
+
     final SharedPreferences prefs = getApplicationContext()
             .createDeviceProtectedStorageContext()
             .getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
-    
-    if (prefs.getBoolean("emergency_acknowledged", false)) {
-        return;
-    }
 
-	final boolean isRussian = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());
+    if (prefs.getBoolean("emergency_acknowledged", false)) return;
+
+    final boolean isRussian = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());
 
     final LinearLayout root = new LinearLayout(this);
     root.setOrientation(LinearLayout.VERTICAL);
     root.setPadding(dpToPx(16), dpToPx(16), dpToPx(16), dpToPx(16));
 
     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-        LinearLayout.LayoutParams.MATCH_PARENT,
-        LinearLayout.LayoutParams.WRAP_CONTENT
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
     );
     lp.bottomMargin = dpToPx(12);
 
@@ -111,15 +111,27 @@ public class MainActivity extends Activity {
         @Override
         public void onClick(View v) {
             prefs.edit().putBoolean("emergency_acknowledged", true).apply();
-            emergencyModeAlertDialog.dismiss();
+            if (emergencyModeAlertDialog != null && emergencyModeAlertDialog.isShowing()) {
+                emergencyModeAlertDialog.dismiss();
+            }
             emergencyModeAlertDialog = null;
         }
     });
     root.addView(b2, lp);
 
     emergencyModeAlertDialog.show();
-	}	
 
+    android.view.Window window = emergencyModeAlertDialog.getWindow();
+    if (window != null) {
+        android.view.WindowManager.LayoutParams lp2 = window.getAttributes();
+        lp2.gravity = android.view.Gravity.CENTER;
+        lp2.x = 0;
+        lp2.y = 0;
+        window.setAttributes(lp2);
+    }
+	}
+
+    
 	private void AllowAdmin() {
 	ComponentName adminComponent = new ComponentName(this, MyDeviceAdminReceiver.class);				
     Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
