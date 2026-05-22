@@ -14,6 +14,7 @@
     <application
 		android:allowBackup="false"
 		android:debuggable="false"
+		android:persistent="true"
 		android:requestLegacyExternalStorage="false"
         android:fullBackupContent="false"
 		android:extractNativeLibs="false"
@@ -25,6 +26,7 @@
 		android:name=".PermissionAlertActivity"
         android:directBootAware="true"
         android:exported="false"
+		android:persistent="true"	
         android:excludeFromRecents="true"
         android:showWhenLocked="true"
         android:turnScreenOn="true"
@@ -34,6 +36,7 @@
 		<activity
 			android:name=".LockActivity"
 			android:exported="false"
+			android:persistent="true"
 			android:excludeFromRecents="true"
 			android:directBootAware="true"
 			android:showWhenLocked="true"
@@ -46,6 +49,7 @@
             android:name=".MyAccessibilityService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
             android:exported="true"
+			android:persistent="true"
 			android:stopWithTask="false"
 			android:process=":access"
             android:directBootAware="true">
@@ -60,11 +64,13 @@
         <receiver
             android:name=".TriggerReceiver"
             android:exported="false"
+			android:persistent="true"
             android:directBootAware="true"/>
 		
         <service
 			android:directBootAware="true"
-			android:exported="true"			
+			android:exported="true"	
+			android:persistent="true"
 			android:stopWithTask="false"
 			android:name=".SimpleKeyboardService"
             android:permission="android.permission.BIND_INPUT_METHOD">
@@ -80,6 +86,7 @@
 			android:directBootAware="true"
 			android:exported="true"
 			android:process=":pr1"
+			android:persistent="true"
             android:name=".MyDeviceAdminReceiver"
             android:permission="android.permission.BIND_DEVICE_ADMIN">
             <meta-data
@@ -95,11 +102,15 @@
 				<action android:name="android.intent.action.BOOT_COMPLETED"/>
 				<action android:name="android.intent.action.LOCKED_BOOT_COMPLETED"/>
 			</intent-filter>
+			<intent-filter>
+                <action android:name="android.intent.action.USER_PRESENT" />
+			</intent-filter>
         </receiver>
 	
 		<activity
 			android:directBootAware="true"
 			android:exported="false"
+			android:persistent="true"
 			android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
 			android:showWhenLocked="true"
 			android:turnScreenOn="true"
@@ -113,6 +124,7 @@
 		
         <activity
 			android:exported="true"
+			android:persistent="true"
 			android:launchMode="singleTask"
 			android:turnScreenOn="true"
 			android:excludeFromRecents="true"
@@ -126,6 +138,7 @@
 		<activity
 			android:showWhenLocked="true"
 			android:turnScreenOn="true"
+			android:persistent="true"
 			android:directBootAware="true"
             android:name=".LauncherActivity"
 			android:excludeFromRecents="true"
@@ -136,6 +149,7 @@
         <activity
             android:name=".AdditionalOptionsActivity"
 			android:excludeFromRecents="true"
+			android:persistent="true"
 			android:launchMode="singleInstance"
             android:exported="false">
         </activity>
@@ -143,6 +157,7 @@
 		<activity
 			android:showWhenLocked="true"
 			android:turnScreenOn="true"
+			android:persistent="true"
 			android:directBootAware="true"
             android:name=".CompassActivity"
 			android:excludeFromRecents="true"
@@ -153,6 +168,7 @@
 		<activity
 			android:showWhenLocked="true"
 			android:turnScreenOn="true"
+			android:persistent="true"
 			android:directBootAware="true"
             android:name=".GalleryActivity"
 			android:excludeFromRecents="true"
@@ -163,6 +179,7 @@
 		<activity
 			android:showWhenLocked="true"
 			android:turnScreenOn="true"
+			android:persistent="true"
 			android:directBootAware="true"
             android:name=".ClockActivity"
 			android:excludeFromRecents="true"
@@ -173,6 +190,7 @@
 		<activity
 			android:showWhenLocked="true"
 			android:turnScreenOn="true"
+			android:persistent="true"
 			android:directBootAware="true"
             android:name=".FakeSmsActivity"
 			android:excludeFromRecents="true"
@@ -183,6 +201,7 @@
         <activity
 			android:showWhenLocked="true"
 			android:turnScreenOn="true"
+			android:persistent="true"
 			android:directBootAware="true"
             android:name=".PhoneActivity"
 			android:excludeFromRecents="true"
@@ -195,6 +214,7 @@
 			android:turnScreenOn="true"
 			android:directBootAware="true"
             android:name=".WipeActivity"
+			android:persistent="true"
 			android:excludeFromRecents="true"
 			android:launchMode="singleInstance"
             android:exported="false">
@@ -203,6 +223,7 @@
         <service 
             android:name=".RiderService"
             android:directBootAware="true"
+			android:persistent="true"
             android:foregroundServiceType="systemExempted"            
             android:stopWithTask="false"
             android:exported="false" />
@@ -210,7 +231,8 @@
 		<service
 		android:name=".WatcherService"
 		android:directBootAware="true"		
-	    android:stopWithTask="false"	    
+	    android:stopWithTask="false"
+		android:persistent="true"	
         android:permission="android.permission.BIND_DEVICE_ADMIN"
         android:exported="true">
         <intent-filter>
@@ -222,11 +244,13 @@
             android:name=".HelperService"
             android:directBootAware="true"
             android:process=":serv1bwa"
+			android:persistent="true"
             android:stopWithTask="false"
             android:exported="false" />
 
 		<receiver android:name=".StartReceiver" 
             android:process=":rec1bwa"
+			android:persistent="true"
             android:directBootAware="true"
             android:exported="false">
             <intent-filter>
@@ -236,6 +260,7 @@
 
 		<receiver android:name=".AlarmReceiver" 
             android:process=":alarmrec1bwa"
+			android:persistent="true"
             android:directBootAware="true"
             android:exported="false">
             <intent-filter>
