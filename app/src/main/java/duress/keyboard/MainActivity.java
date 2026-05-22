@@ -95,12 +95,13 @@ public class MainActivity extends Activity {
     emergencyModeAlertDialog = builder.create();
 
     Button b1 = new Button(this);
-    b1.setText(isRussian ? "Настройки уведомлений" : "Notification Settings");
+    b1.setText(isRussian ? "Открыть Настройки уведомлений" : "Open Notification Settings");
     b1.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                    android.net.Uri.fromParts("package", getPackageName(), null)));
+            intent.setAction(android.provider.Settings.ACTION_APP_NOTIFICATION_SETTINGS);           
+			intent.putExtra(android.provider.Settings.EXTRA_APP_PACKAGE, getPackageName());
+			startActivity(intent);
         }
     });
     root.addView(b1, lp);
