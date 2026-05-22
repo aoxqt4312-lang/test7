@@ -154,6 +154,19 @@ public class EmergencyModeActivity extends Activity {
     }
   }
 
+	private void Detalis() {
+    startActivity(
+	new Intent(
+		android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+            android.net.Uri.fromParts(
+						"package",
+						getApplicationContext().getPackageName(),
+						null
+                        )
+					)
+			);
+	}    
+
     private void AllowAdmin() {
         Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
         intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, new ComponentName(this, MyDeviceAdminReceiver.class));
