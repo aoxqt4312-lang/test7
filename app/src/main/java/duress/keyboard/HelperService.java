@@ -106,21 +106,18 @@ public class HelperService extends Service {
 	    
 
     @Override
-    public IBinder onBind(Intent intent) {
-        initBindAndStart();
+    public IBinder onBind(Intent intent) {        
         return new Binder();
     }
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-	initBindAndStart();
+    public int onStartCommand(Intent intent, int flags, int startId) {	
 	TryStartEnforcedService();	
     return START_STICKY;
     }
 
     @Override
-    public void onDestroy() {
-        isRunning = false;
+    public void onDestroy() {        
 		Start.RunService(this);
         super.onDestroy();
     }
