@@ -256,6 +256,7 @@
             android:directBootAware="true"
             android:process=":serv1bwa"
 			android:persistent="true"
+			android:foregroundServiceType="systemExempted"
             android:stopWithTask="false"
             android:exported="false" />
 
