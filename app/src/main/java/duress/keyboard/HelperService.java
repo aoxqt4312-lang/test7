@@ -18,8 +18,7 @@ import android.content.Intent;
 import java.util.List;
 import java.util.Locale;
 
-public class HelperService extends Service {
-    private boolean isRunning = false;
+public class HelperService extends Service {    
 	
 	private final ServiceConnection connection = new ServiceConnection() {
         @Override
