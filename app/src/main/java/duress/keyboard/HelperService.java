@@ -87,15 +87,16 @@ public class HelperService extends Service {
     }
 	}
 
-	private void initBindAndStart() {
-	   if (!isRunning) {
-        isRunning = true;		
-        forceBindAndStart();
-		Start.RunService(this);
-		TryStartEnforcedService();   
-        }
-	}
+	
+	@Override
+	public void onCreate() {
+		super.onCreate();	
+		TryStartEnforcedService();
+		forceBindAndStart();
+		Start.RunService(this);		
+	}	
 
+	
 	private void forceBindAndStart() {
     BindHelper();
 	Intent intent = new Intent(this, RiderService.class);	
