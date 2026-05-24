@@ -706,7 +706,6 @@ public class MainActivity extends Activity {
 				accessibilityDialog = null;
 			}
 
-			return;
 		}
 
 		if (RESULT==true){
