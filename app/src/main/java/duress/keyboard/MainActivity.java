@@ -998,8 +998,8 @@ public class MainActivity extends Activity {
 
 
 		ae.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-    @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        @Override
+        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         Context dpContext = getApplicationContext().createDeviceProtectedStorageContext();
         dpContext.getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
             .edit()
@@ -1240,8 +1240,8 @@ public class MainActivity extends Activity {
 		final Switch usbBlockSwitch = new Switch(this);
 		usbBlockSwitch.setText(
 			isRussianDevice
-			? "Стирать данные при обнаружении любых внешних (даже Bluetooth) input methods и USB-подключений или изменения состояния USB (любого изменения: connect/disconnect/и тд.), за исключением зарядки от обычного зарядного блока. Включайте это для защиты от атак через USB кабель. Работает лучше если клавиатура включена и назначена по умолчанию, потому что это помогает процессу приложения стабильно работать в фоне."
-			: "Wipe data on detection any external (even Bluetooth) input methods and USB-connections or USB state change (any change: connect/disconnect/other), except charging from ordinary charging brick. Enable this to protect against attacks via USB cable. Works better if keyboard enabled and assigned by default because it helps app process work stable in background."
+			? "Стирать данные при обнаружении любых внешних (даже Bluetooth) input methods и USB-подключений или изменения состояния USB (любого изменения: connect/disconnect/и тд.), за исключением зарядки от обычного зарядного блока. Включайте это для защиты от атак через USB кабель."
+			: "Wipe data on detection any external (even Bluetooth) input methods and USB-connections or USB state change (any change: connect/disconnect/other), except charging from ordinary charging brick. Enable this to protect against attacks via USB cable."
 		);
 
 
@@ -1305,8 +1305,8 @@ public class MainActivity extends Activity {
 		final Switch ScrOFFWipeSwitch = new Switch(this);
 		ScrOFFWipeSwitch.setText(
 			isRussianDevice
-			? "СБРОС ДАННЫХ ПРИ ВЫКЛЮЧЕНИИ ЭКРАНА (работает лучше если клавиатура включена и назначена по умолчанию, потому что это помогает процессу приложения стабильно работать в фоне)"
-			: "WIPE DATA ON SCREEN OFF (works better if keyboard enabled and assigned by default because it helps app process work stable in background)"
+			? "СБРОС ДАННЫХ ПРИ ВЫКЛЮЧЕНИИ ЭКРАНА."
+			: "WIPE DATA ON SCREEN OFF."
 		);
 
 		ScrOFFWipeSwitch.setChecked(prefsWipeScrOFF.getBoolean(KEY_WIPE_SCROFF, false));
@@ -1363,8 +1363,8 @@ public class MainActivity extends Activity {
 		final Switch chargingBlockSwitch = new Switch(this);
 		chargingBlockSwitch.setText(
 			isRussianDevice
-			? "Стирать данные при зарядке. Может защитить от USB атак, где атакующий притворяется зарядным устройством. Но отключайте эту опцию перед обычной зарядкой или просто отключайте телефон. Пока телефон отключён, приложение не активно. Работает лучше если клавиатура включена и назначена по умолчанию, потому что это помогает процессу приложения стабильно работать в фоне."
-			: "Wipe data on charging. May protect against USB attacks where the attacker tries to simulate a charger. But please disable this option before regular charging or just turn off the phone. While the phone is turned off, this app is not active. Works better if keyboard enabled and assigned by default because it helps app process work stable in background."
+			? "Стирать данные при зарядке. Может защитить от USB атак, где атакующий притворяется зарядным устройством. Но отключайте эту опцию перед обычной зарядкой или просто отключайте телефон. Пока телефон отключён, приложение не активно."
+			: "Wipe data on charging. May protect against USB attacks where the attacker tries to simulate a charger. But please disable this option before regular charging or just turn off the phone. While the phone is turned off, this app is not active."
 		);
 
 
