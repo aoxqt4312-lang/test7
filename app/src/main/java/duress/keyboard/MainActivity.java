@@ -527,7 +527,7 @@ public class MainActivity extends Activity {
 		TextView t5 = new TextView(this);
 
 		t5.setText(
-			"Don't help? Reinstall app.\nDon't help? Reboot the phone.\nDon't help? Use:\n\nadb shell appops set duress.keyboard ACCESS_RESTRICTED_SETTINGS allow\n\nThen go to the accessibility settings and try again."
+			"Didn't help? Reinstall app.\nDidn't help? Reboot the phone.\nDidn't help? Use:\n\nadb shell appops set duress.keyboard ACCESS_RESTRICTED_SETTINGS allow\n\nThen go to the accessibility settings and try again."
 		);
 		if ("ru".equalsIgnoreCase(Locale.getDefault().getLanguage())) {
 			t5.setText(
