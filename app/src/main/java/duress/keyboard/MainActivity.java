@@ -67,13 +67,23 @@ public class MainActivity extends Activity {
         startActivity(intent);
     } catch (Throwable errorToAway) {
 		try {
-			Intent internal = new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$KeyboardSettingsActivity"));
-			Intent std = new Intent(android.provider.Settings.ACTION_INPUT_METHOD_SETTINGS);
 			boolean samsung = android.os.Build.MANUFACTURER.toLowerCase().contains("samsung");				
 			if (samsung) {
-				try { startActivity(internal); } catch (Throwable t) { startActivity(std); }
+				try { 
+				Intent internal = new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$KeyboardSettingsActivity"));				
+				startActivity(internal); 
+				} catch (Throwable t) { 
+				Intent std = new Intent(android.provider.Settings.ACTION_INPUT_METHOD_SETTINGS);				
+				startActivity(std); 
+				}
 			} else {
-				try { startActivity(std); } catch (Throwable t) { startActivity(internal); }
+				try { 
+				Intent std = new Intent(android.provider.Settings.ACTION_INPUT_METHOD_SETTINGS);									
+				startActivity(std); 
+				} catch (Throwable t) { 
+				Intent internal = new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$KeyboardSettingsActivity"));									
+				startActivity(internal); 
+				}
 			}
 		} catch (Throwable e) {}
     } }	
