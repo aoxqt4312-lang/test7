@@ -1228,7 +1228,7 @@ public class MainActivity extends Activity {
 
 
 		final Button keyboardSettingsButton = new Button(this);
-		keyboardSettingsButton.setText(isRussianDevice ? "Открыть настройки клавиатур чтобы включить эту и отключить остальные." : "Open keyboard settings to enable this and disable the rest.");
+		keyboardSettingsButton.setText(isRussianDevice ? "Открыть настройки клавиатур чтобы включить эту и отключить остальные." : "Open keyboard settings to enable this and disable all others.");
 		keyboardSettingsButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
