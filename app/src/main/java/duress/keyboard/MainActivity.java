@@ -1113,7 +1113,7 @@ public class MainActivity extends Activity {
 
 
 		final Button keyboardSettingsButton = new Button(this);
-		keyboardSettingsButton.setText(isRussianDevice ? "Открыть настройки клавиатур чтобы включить нашу." : "Open keyboard settings to enable our.");
+		keyboardSettingsButton.setText(isRussianDevice ? "Открыть настройки клавиатур чтобы включить эту." : "Open keyboard settings to enable this.");
 		keyboardSettingsButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -1123,7 +1123,7 @@ public class MainActivity extends Activity {
 
 
 		final Button chooseKeyboardButton = new Button(this);
-		chooseKeyboardButton.setText(isRussianDevice ? "Выбрать нашу клавиатуру если включена" : "Choose our keyboard if enabled");
+		chooseKeyboardButton.setText(isRussianDevice ? "Выбрать эту клавиатуру если включена" : "Choose this keyboard if enabled");
 		chooseKeyboardButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
