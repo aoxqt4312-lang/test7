@@ -240,6 +240,8 @@ public class MainActivity extends Activity {
             android.content.Intent intent = new android.content.Intent();
 			intent.setComponent(new android.content.ComponentName("com.android.settings", "com.android.settings.DeviceAdminSettings"));
             startActivity(intent);
+			isPendingAdmin = 1;	
+			adminErrorDialog.dismiss();	
             } catch (Throwable e) {}
         }
     });	
