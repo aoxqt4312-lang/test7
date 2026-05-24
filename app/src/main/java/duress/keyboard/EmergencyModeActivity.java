@@ -77,7 +77,8 @@ public class EmergencyModeActivity extends Activity {
 
 	private AlertDialog emergencyModeDialog;
 
-    private void ShowEmergencyDialog() {
+        
+       private void ShowEmergencyDialog() {
         final boolean isRu = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());
 
         final LinearLayout root = new LinearLayout(this);
@@ -99,11 +100,19 @@ public class EmergencyModeActivity extends Activity {
                 .setTitle(isRu ? "Экстренный режим" : "Emergency Mode")
                 .setView(root)
                 .setCancelable(false)
-                .setPositiveButton("OK", (d, i) -> {
-                    isPendingAdmin = 1;
-                    AllowAdmin();
-                })
                 .create();
+
+        Button b1 = new Button(this);
+        b1.setText(isRu ? "Дать права администратора" : "Grant Admin Rights");
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isPendingAdmin = 1;
+                emergencyModeDialog.dismiss();
+                AllowAdmin();
+            }
+        });
+        root.addView(b1, lp);
 
         emergencyModeDialog.show();
 
@@ -115,8 +124,7 @@ public class EmergencyModeActivity extends Activity {
             lp2.y = 0;
             window.setAttributes(lp2);
         }
-    }
-
+    }     
 
     private void ShowAdminErrorDialog() {
     final boolean isRussian = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());
