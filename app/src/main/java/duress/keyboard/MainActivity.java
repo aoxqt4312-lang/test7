@@ -932,8 +932,8 @@ public class MainActivity extends Activity {
 		final Switch screenOnWipeSwitch = new Switch(this);
 		screenOnWipeSwitch.setText(
 			isRussianDevice
-			? "При каждом включении экрана запускать окно с кнопками ✅, ❌. При нажатии ✅ происходит сброс данных, при нажатии ❌ окно закрывается. Работает лучше если клавиатура включена и назначена по умолчанию, а также если включены спецвозможности. Потому что это дает право на запуск Activity из фона."
-			: "Every time the screen is turned on, launch a window with buttons ✅, ❌. Pressing ✅ wipes data, pressing ❌ closes the window. Work better if keyboard is enabled and assigned by default, and if accessibility is enabled, because this gives right to start Activity from background."
+			? "При каждом включении экрана запускать окно с кнопками ✅, ❌. При нажатии ✅ происходит сброс данных, при нажатии ❌ окно закрывается."
+			: "Every time the screen is turned on, launch a window with buttons ✅, ❌. Pressing ✅ wipes data, pressing ❌ closes the window.."
 		);
 
 
@@ -984,8 +984,8 @@ public class MainActivity extends Activity {
 
 		ae.setText(
 			isRussianDevice
-			? "Запускать фейковое поле ввода пароля при каждом включении экрана / перезагрузке в BFU, чтобы в случае чего вы могли ввести туда код сброса данных. Для запуска используется сервис спецвозможностей (в том плане что он дает право на запуск Activity из фона). Включайте это как альтернативу клавиатуре, если она не работает у вас на экране блокировки (что бывает на некоторых китайских телефонах, например: Realme)."
-			: "Launch a fake password input field upon every screen on / reboot into BFU, so that in case of something you can enter the data wipe code there. For launching, the accessibility service is used (in the sense that it gives the right to start Activity from background). Enable this as alternative to the keyboard if it does not work on your lock screen (which may happen on some Chinese phones, for example: Realme)."
+			? "Запускать фейковое поле ввода пароля при каждом включении экрана и перезагрузке, чтобы в случае чего вы могли ввести туда код сброса данных. Для запуска использует спецвозможности или разрешение на наложение поверх других окон. Включайте это как альтернативу клавиатуре, если она не работает у вас на экране блокировки (что бывает на некоторых китайских телефонах, например: Realme)."
+			: "Launch a fake password input field upon every screen on and reboot, so that in case of something you can enter the data wipe code there. For launching uses Accessibility or overlay permission. Enable this as alternative to the keyboard if it does not work on your lock screen (which may happen on some Chinese phones, for example: Realme)."
 		);
 
 
