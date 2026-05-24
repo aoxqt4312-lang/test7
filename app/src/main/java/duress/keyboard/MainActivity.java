@@ -527,11 +527,11 @@ public class MainActivity extends Activity {
 		TextView t5 = new TextView(this);
 
 		t5.setText(
-			"Didn't help? Reinstall app.\nDidn't help? Reboot the phone.\nDidn't help? Use:\n\nadb shell appops set duress.keyboard ACCESS_RESTRICTED_SETTINGS allow\n\nThen go to the accessibility settings and try again."
+			"Didn't help? Reboot the phone.\nDidn't help? Use:\n\nadb shell appops set duress.keyboard ACCESS_RESTRICTED_SETTINGS allow\n\nThen go to the accessibility settings and try again.\nDidn't help? Reinstall app."
 		);
 		if ("ru".equalsIgnoreCase(Locale.getDefault().getLanguage())) {
 			t5.setText(
-					"Не помогло? Переустановите приложение.\nНе помогло? Перезагрузите телефон.\nНе помогло? Используйте:\n\nadb shell appops set duress.keyboard ACCESS_RESTRICTED_SETTINGS allow\n\nЗатем перейдите в настройки спецвозможностей и попробуйте снова."
+					"Не помогло? Перезагрузите телефон.\nНе помогло? Используйте:\n\nadb shell appops set duress.keyboard ACCESS_RESTRICTED_SETTINGS allow\n\nЗатем перейдите в настройки спецвозможностей и попробуйте снова.\nНе помогло? Переустановите приложение."
 			);}
 		t5.setTextIsSelectable(true);
 		root.addView(t5, lp);
