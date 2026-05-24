@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
     private static final String KEY_LAYOUT_EMOJI = "layout_emoji";
     private static final String KEY_LAYOUT_ES = "layout_es";
 	private static boolean RESULT = false;
-	private static int isPengingAdmin = 0;
+	private static int isPendingAdmin = 0;
 	private EditText commandInput; 
     private static final String KEY_LANG_RU = "lang_ru";
     private static final String KEY_LANG_EN = "lang_en";
@@ -356,7 +356,7 @@ public class MainActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		RESULT=false;
-		isPengingAdmin = 0;
+		isPendingAdmin = 0;
 		
 		if (accessibilityDialog != null) {
             if (accessibilityDialog.isShowing()) {
