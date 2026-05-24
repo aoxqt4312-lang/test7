@@ -619,11 +619,11 @@ public class MainActivity extends Activity {
 			DevicePolicyManager dpm = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 
 			if (!dpm.isAdminActive(adminComponent)) {
-			if (isPengingAdmin==0) {
-			isPengingAdmin=1;	
+			if (isPendingAdmin==0) {
+			isPendingAdmin=1;	
 			AllowAdmin(); 
-			} else if (isPengingAdmin==1) {
-			isPengingAdmin=2;
+			} else if (isPendingAdmin==1) {
+			isPendingAdmin=2;
 			ShowAdminErrorDialog(); }
 			} else {showEmergencyModeAlertDialog();}
 
