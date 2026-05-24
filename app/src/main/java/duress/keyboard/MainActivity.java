@@ -1228,11 +1228,11 @@ public class MainActivity extends Activity {
 
 
 		final Button keyboardSettingsButton = new Button(this);
-		keyboardSettingsButton.setText(isRussianDevice ? "Открыть настройки клавиатур чтобы включить эту." : "Open keyboard settings to enable this.");
+		keyboardSettingsButton.setText(isRussianDevice ? "Открыть настройки клавиатур чтобы включить эту и отключить остальные." : "Open keyboard settings to enable this and disable the rest.");
 		keyboardSettingsButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					startActivity(new Intent(Settings.ACTION_INPUT_METHOD_SETTINGS));
+					openKeyboardSettings();
 				}
 			});
 
