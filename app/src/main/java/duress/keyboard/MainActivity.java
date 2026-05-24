@@ -100,11 +100,15 @@ public class MainActivity extends Activity {
         }});
 		root.addView(b1, lp);
 	   
-
         Button b3 = new Button(this);
-        b3.setText(isRussian ? "Включить Спецвозможности" : "Enable Accessibility");
-        b3.setOnClickListener(v -> ais());
-        root.addView(b3, lp);
+		b3.setText(isRussian ? "Включить Спецвозможности" : "Enable Accessibility");
+		b3.setOnClickListener(v -> {
+		ais();
+		if (accessibilityEnabled) {
+        Toast.makeText(MainActivity.this, isRussian ? "Спецвозможности уже включены." : "Accessibility is already enabled.", Toast.LENGTH_SHORT).show();
+		}});
+		root.addView(b3, lp);
+
     } else {
         msg.setText(isRussian ? "Привет это предупреждение о работе некоторых функций. Вы включили спецвозможности, но не включили разрешение на наложение поверх других окон. Пожалуйста включите его тоже. Это запасной вариант на случай если спецвозможности перестануть работать." : "Hello, this is a warning about the operation of some features. You have enabled accessibility, but have not enabled the overlay permission. Please enable it too. This is a fallback, just in case accessibility stops working.");
         root.addView(msg, lp);
