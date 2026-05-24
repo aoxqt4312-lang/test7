@@ -119,7 +119,7 @@ public class MainActivity extends Activity {
             try {
                 Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
                 startActivity(intent);
-            } catch (Exception e) {
+            } catch (Throwable e) {
                 startActivity(new Intent(android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION));
             }
         });
