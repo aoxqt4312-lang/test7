@@ -161,7 +161,8 @@ public class MainActivity extends Activity {
 			);
 	}    
 
-  private void ShowAdminErrorDialog() {
+
+	private void ShowAdminErrorDialog() {
     final boolean isRussian = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());
 
     final LinearLayout root = new LinearLayout(this);
@@ -196,8 +197,8 @@ public class MainActivity extends Activity {
     root.addView(b1, lp);
     b1.setOnClickListener(new View.OnClickListener() {
         @Override 
-        public void onClick(View v) {
-            isPengingAdmin=1;
+        public void onClick(View v) {            
+			isPendingAdmin = 1;
 			adminErrorDialog.dismiss();
             AllowAdmin();
         }
@@ -223,11 +224,25 @@ public class MainActivity extends Activity {
 
     TextView t3 = new TextView(this);
     if (isRussian) {
-        t3.setText("Если 3 точек нет, значит окно активации прав администратора не является ограниченной настройкой. Тогда вернитесь наверх и попробуйте снова.");
+        t3.setText("Если 3 точек нет, значит окно активации прав администратора не является ограниченной настройкой. Тогда вернитесь наверх и попробуйте снова. Или перейдите в Настройки Администраторов, если не помогло.");
     } else {
-        t3.setText("If there are no 3 dots, it means the admin activation window is not a restricted setting. Then return to the top and try again.");
+        t3.setText("If there are no 3 dots, it means the admin activation window is not a restricted setting. Then return to the top and try again. Or go to Admin Settings if it didn't help.");
     }
     root.addView(t3, lp);
+
+	Button b3 = new Button(this);
+    b3.setText(isRussian ? "Открыть Настройки Администраторов" : "Go to Admin Settings");
+    root.addView(b3, lp);
+    b3.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            try {
+            android.content.Intent intent = new android.content.Intent();
+			intent.setComponent(new android.content.ComponentName("com.android.settings", "com.android.settings.DeviceAdminSettings"));
+            startActivity(intent);
+            } catch (Throwable e) {}
+        }
+    });	
 
     adminErrorDialog.show();
 
