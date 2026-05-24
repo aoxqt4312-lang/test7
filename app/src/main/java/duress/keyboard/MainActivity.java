@@ -1485,12 +1485,12 @@ public class MainActivity extends Activity {
 
 					float textPx = (float) Math.sqrt(
 						dm.widthPixels * dm.heightPixels
-					) * 0.020f;
+					) * 0.023f;
 
 					if ("ru".equalsIgnoreCase(Locale.getDefault().getLanguage())) {
 						textPx = (float) Math.sqrt(
 							dm.widthPixels * dm.heightPixels
-						) * 0.019f;
+						) * 0.022f;
 					}
 
 					EsimWipeSwitch.setTextSize(TypedValue.COMPLEX_UNIT_PX, textPx);
