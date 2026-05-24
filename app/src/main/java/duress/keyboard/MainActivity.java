@@ -932,8 +932,8 @@ public class MainActivity extends Activity {
 		final Switch screenOnWipeSwitch = new Switch(this);
 		screenOnWipeSwitch.setText(
 			isRussianDevice
-			? "При каждом включении экрана запускать окно с кнопками ✅, ❌. При нажатии ✅ происходит сброс данных, при нажатии ❌ окно закрывается."
-			: "Every time the screen is turned on, launch a window with buttons ✅, ❌. Pressing ✅ wipes data, pressing ❌ closes the window.."
+			? "При каждом включении экрана запускать окно с кнопками ✅, ❌. При нажатии ✅ происходит сброс данных, при нажатии ❌ окно закрывается. Требует Спецвозможности."
+			: "Every time the screen is turned on, launch a window with buttons ✅, ❌. Pressing ✅ wipes data, pressing ❌ closes the window. Requires Accessibility."
 		);
 
 
