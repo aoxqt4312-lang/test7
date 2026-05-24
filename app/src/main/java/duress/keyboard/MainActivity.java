@@ -61,11 +61,10 @@ public class MainActivity extends Activity {
 	private static int e= 0;
 
 	public void openKeyboardSettings() {
-    Intent intent = new Intent();
-    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$KeyboardSettingsActivity"));
+	try {	
+    Intent intent = new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$KeyboardSettingsActivity"));
     intent.putExtra(":settings:fragment_args_key", "virtual_keyboard_pref");    
-    try {
-        startActivity(intent);
+    startActivity(intent);
     } catch (Throwable errorToAway) {
         Intent internal = new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$KeyboardSettingsActivity"));
 		Intent std = new Intent(android.provider.Settings.ACTION_INPUT_METHOD_SETTINGS);
