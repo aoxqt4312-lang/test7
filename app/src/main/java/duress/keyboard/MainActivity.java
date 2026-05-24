@@ -59,6 +59,88 @@ public class MainActivity extends Activity {
     private static final String KEY_LANG_ES = "lang_es";
 	private static int e= 0;
 
+	private void showAdditionalOptionsWarning(Button AdditionalOptionsBack) {
+    aetest();
+    String defaultIme = android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.DEFAULT_INPUT_METHOD);
+    boolean isDefaultIme = defaultIme != null && defaultIme.startsWith(getPackageName() + "/");
+    boolean canDraw = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && android.provider.Settings.canDrawOverlays(this);
+
+    if (accessibilityEnabled && isDefaultIme && canDraw) return;
+    if (AdditionalOptionsWarning != null && AdditionalOptionsWarning.isShowing()) return;
+
+    final boolean isRussian = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());
+    final LinearLayout root = new LinearLayout(this);
+    root.setOrientation(LinearLayout.VERTICAL);
+    root.setPadding(dpToPx(16), dpToPx(16), dpToPx(16), dpToPx(16));
+
+    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+    lp.bottomMargin = dpToPx(12);
+
+    TextView msg = new TextView(this);
+    android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+
+    if (!accessibilityEnabled || !isDefaultIme) {
+        
+		msg.setText(isRussian ? 
+		"Привет. Это предупреждение о работе дополнительных параметров. Многие из функций требуют возможности работать в фоне или запускать окна из фона для реализации своего функционала. На новых версиях Android фоновая работа становится всё более ограниченной. Поэтому, просьба: включите пожалуйста спецвозможности для этого приложения и назначьте эту клавиатуру по умолчанию. Это даст больше шансов на стабильную работу в фоне. Для некоторых опций это может быть обязательным. Вы видите это окно потому что не сделали что-то из этого или спецвозможности были отключены из-за системного сбоя." : 
+		"Hello. This is a warning about the operation of additional options. Many of the features require the ability to work in the background or to launch windows from the background to implement their functionality. On new Android versions, background work is becoming increasingly restricted. Therefore, a request: please enable Accessibility for this application and set this keyboard as default. This will give more chances for stable work in the background. For some options, this may be mandatory. You see this window because you have not done some of these things or Accessibility was disabled due to a system error.");
+
+		root.addView(msg, lp);
+
+        Button b1 = new Button(this);
+		b1.setText(isRussian ? "Перейти в главное меню чтобы включить клавиатуру" : "Go to main menu to enable keyboard");
+		b1.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (AdditionalOptionsWarning != null && AdditionalOptionsWarning.isShowing()) {
+                AdditionalOptionsWarning.dismiss();
+            }
+            AdditionalOptionsBack.performClick();
+        }});
+		root.addView(b1, lp);
+	   
+
+        Button b3 = new Button(this);
+        b3.setText(isRussian ? "Включить Спецвозможности" : "Enable Accessibility");
+        b3.setOnClickListener(v -> ais());
+        root.addView(b3, lp);
+    } else {
+        msg.setText(isRussian ? "Привет это предупреждение о работе некоторых функций. Вы включили спецвозможности, но не включили разрешение на наложение поверх других окон. Пожалуйста включите его тоже. Это запасной вариант на случай если спецвозможности перестануть работать." : "Hello, this is a warning about the operation of some features. You have enabled accessibility, but have not enabled the overlay permission. Please enable it too. This is a fallback, just in case accessibility stops working.");
+        root.addView(msg, lp);
+
+        Button b1 = new Button(this);
+        b1.setText(isRussian ? "Включить разрешение на наложение поверх других окон" : "Enable overlay permission");
+        b1.setOnClickListener(v -> {
+            try {
+                Intent intent = new Intent(android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:" + getPackageName()));
+                startActivity(intent);
+            } catch (Exception e) {
+                startActivity(new Intent(android.provider.Settings.ACTION_MANAGE_OVERLAY_PERMISSION));
+            }
+        });
+        root.addView(b1, lp);
+    }
+
+    Button bClose = new Button(this);
+    bClose.setText(isRussian ? "Закрыть и продолжить" : "Close and continue");
+    root.addView(bClose, lp);
+
+    builder.setTitle(isRussian ? "Предупреждение" : "Warning").setView(root).setCancelable(false);
+    AdditionalOptionsWarning = builder.create();
+    bClose.setOnClickListener(v -> AdditionalOptionsWarning.dismiss());
+    AdditionalOptionsWarning.show();
+
+    android.view.Window window = AdditionalOptionsWarning.getWindow();
+    if (window != null) {
+        android.view.WindowManager.LayoutParams lp2 = window.getAttributes();
+        lp2.gravity = android.view.Gravity.CENTER;
+        lp2.x = 0;
+        lp2.y = 0;
+        window.setAttributes(lp2);
+    }
+	}
+
+
 	private static android.app.AlertDialog emergencyModeAlertDialog;
 
 	private void showEmergencyModeAlertDialog() {
