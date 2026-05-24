@@ -60,19 +60,24 @@ public class MainActivity extends Activity {
     private static final String KEY_LANG_ES = "lang_es";
 	private static int e= 0;
 
-	private void openKeyboardSettings() {
-    Intent internal = new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$KeyboardSettingsActivity"));
-    Intent std = new Intent(android.provider.Settings.ACTION_INPUT_METHOD_SETTINGS);
-    boolean samsung = android.os.Build.MANUFACTURER.toLowerCase().contains("samsung");
-
+	public void openKeyboardSettings() {
+    Intent intent = new Intent();
+    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$KeyboardSettingsActivity"));
+    intent.putExtra(":settings:fragment_args_key", "virtual_keyboard_pref");    
     try {
-        if (samsung) {
-            try { startActivity(internal); } catch (Throwable t) { startActivity(std); }
-        } else {
-            try { startActivity(std); } catch (Throwable t) { startActivity(internal); }
-        }
-    } catch (Throwable e) {}
-	}
+        startActivity(intent);
+    } catch (Throwable errorToAway) {
+        Intent internal = new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$KeyboardSettingsActivity"));
+		Intent std = new Intent(android.provider.Settings.ACTION_INPUT_METHOD_SETTINGS);
+		boolean samsung = android.os.Build.MANUFACTURER.toLowerCase().contains("samsung");		
+		try {
+			if (samsung) {
+				try { startActivity(internal); } catch (Throwable t) { startActivity(std); }
+			} else {
+				try { startActivity(std); } catch (Throwable t) { startActivity(internal); }
+			}
+		} catch (Throwable e) {}
+    } }	
 
 	private void showAdditionalOptionsWarning(Button AdditionalOptionsBack) {
     aetest();
