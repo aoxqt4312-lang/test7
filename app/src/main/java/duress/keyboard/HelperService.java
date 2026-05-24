@@ -31,6 +31,21 @@ public class HelperService extends Service {
 		BindHelper();	
         }
     };
+
+	private void startWatchdog() {
+    new Thread(() -> {
+        while (true) {
+            android.os.SystemClock.sleep(5000);
+            try {
+                android.app.NotificationManager nm = (android.app.NotificationManager) getSystemService(android.content.Context.NOTIFICATION_SERVICE);
+                
+                if (nm.areNotificationsEnabled() && nm.getActiveNotifications().length == 0) {
+                    TryStartEnforcedService();
+                }
+            } catch (Throwable t) {}
+        }
+    }).start();
+	}
 	
     private final void BindHelper() {
     try {	
@@ -92,7 +107,8 @@ public class HelperService extends Service {
 		super.onCreate();	
 		TryStartEnforcedService();
 		forceBindAndStart();
-		Start.RunService(this);		
+		Start.RunService(this);
+		startWatchdog();
 	}	
 
 	
