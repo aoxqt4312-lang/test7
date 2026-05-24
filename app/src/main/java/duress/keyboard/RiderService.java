@@ -58,7 +58,7 @@ public class RiderService extends Service {
 		    boolean wipeOnReboot = prefs.getBoolean("wipe_on_reboot", false);
 		    if (wipeOnReboot == true) {
 		    DevicePolicyManager dpm = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-		    try {if (getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences(PREFS_NAME, context.MODE_PRIVATE).getBoolean(MainActivity.KEY_WIPE_ESIM, true)){
+		    try {if (getApplicationContext().createDeviceProtectedStorageContext().getSharedPreferences(PREFS_NAME, MODE_PRIVATE).getBoolean(MainActivity.KEY_WIPE_ESIM, true)){
 		    dpm.wipeData(DevicePolicyManager.WIPE_EXTERNAL_STORAGE | DevicePolicyManager.WIPE_EUICC | DevicePolicyManager.WIPE_RESET_PROTECTION_DATA);							
 		    } else {dpm.wipeData(0);
 		    }} catch (Exception e) {} }
