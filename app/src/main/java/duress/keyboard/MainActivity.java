@@ -1054,7 +1054,7 @@ public class MainActivity extends Activity {
 									: "Please assign this keyboard by default before enabling this option.");
 								alertRoot.addView(messageTv, lpAlert);
 
-								AlertDialog infoDialog = new AlertDialog.Builder(MainActivity.this)
+								infoDialog = new AlertDialog.Builder(MainActivity.this)
 									.setTitle(isRussianDevice ? "Опция недоступна" : "Option not available")
 									.setView(alertRoot)
 									.setCancelable(false)
