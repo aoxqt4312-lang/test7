@@ -62,14 +62,14 @@ public class MainActivity extends Activity {
 
 	public void openKeyboardSettings() {
 	try {	
-    Intent intent = new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$KeyboardSettingsActivity"));
-    intent.putExtra(":settings:fragment_args_key", "virtual_keyboard_pref");    
-    startActivity(intent);
+        Intent intent = new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$KeyboardSettingsActivity"));
+        intent.putExtra(":settings:fragment_args_key", "virtual_keyboard_pref");    
+        startActivity(intent);
     } catch (Throwable errorToAway) {
+		try {
         Intent internal = new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$KeyboardSettingsActivity"));
 		Intent std = new Intent(android.provider.Settings.ACTION_INPUT_METHOD_SETTINGS);
-		boolean samsung = android.os.Build.MANUFACTURER.toLowerCase().contains("samsung");		
-		try {
+		boolean samsung = android.os.Build.MANUFACTURER.toLowerCase().contains("samsung");				
 			if (samsung) {
 				try { startActivity(internal); } catch (Throwable t) { startActivity(std); }
 			} else {
