@@ -1520,6 +1520,7 @@ public class MainActivity extends Activity {
 						});
 					layout.addView(AdditionalOptionsBack);
 					setContentView(layout);
+					showAdditionalOptionsWarning(AdditionalOptionsBack);
 				}
 			});
 
