@@ -443,6 +443,13 @@ public class MainActivity extends Activity {
 		RESULT=false;
 		isPendingAdmin = 0;
 		
+		if (AdditionalOptionsWarning != null) {
+			if (AdditionalOptionsWarning.isShowing()) {
+				AdditionalOptionsWarning.dismiss();
+			}
+			AdditionalOptionsWarning = null;
+		}
+		
 		if (accessibilityDialog != null) {
             if (accessibilityDialog.isShowing()) {
                 accessibilityDialog.dismiss();
