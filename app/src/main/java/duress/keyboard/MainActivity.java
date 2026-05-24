@@ -450,6 +450,13 @@ public class MainActivity extends Activity {
 			}
 			AdditionalOptionsWarning = null;
 		}
+
+		if (infoDialog != null) {
+			if (infoDialog.isShowing()) {
+				infoDialog.dismiss();
+			}
+			infoDialog = null;
+		}
 		
 		if (accessibilityDialog != null) {
             if (accessibilityDialog.isShowing()) {
