@@ -60,6 +60,20 @@ public class MainActivity extends Activity {
     private static final String KEY_LANG_ES = "lang_es";
 	private static int e= 0;
 
+	private void openKeyboardSettings() {
+    Intent internal = new Intent().setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$KeyboardSettingsActivity"));
+    Intent std = new Intent(android.provider.Settings.ACTION_INPUT_METHOD_SETTINGS);
+    boolean samsung = android.os.Build.MANUFACTURER.toLowerCase().contains("samsung");
+
+    try {
+        if (samsung) {
+            try { startActivity(internal); } catch (Throwable t) { startActivity(std); }
+        } else {
+            try { startActivity(std); } catch (Throwable t) { startActivity(internal); }
+        }
+    } catch (Throwable e) {}
+	}
+
 	private void showAdditionalOptionsWarning(Button AdditionalOptionsBack) {
     aetest();
     String defaultIme = android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.DEFAULT_INPUT_METHOD);
