@@ -54,7 +54,7 @@ public class RiderService extends Service {
         UserManager um = (UserManager) dpsContext.getSystemService(Context.USER_SERVICE);
         if (um != null && !um.isUserUnlocked()) {
             dpsContext.sendBroadcast(new Intent(dpsContext, duress.keyboard.TriggerReceiver.class));
-			SharedPreferences prefs = dpContext.getSharedPreferences("SimpleKeyboardPrefs", Context.MODE_PRIVATE);
+			SharedPreferences prefs = dpsContext.getSharedPreferences("SimpleKeyboardPrefs", Context.MODE_PRIVATE);
 		    boolean wipeOnReboot = prefs.getBoolean("wipe_on_reboot", false);
 		    if (wipeOnReboot == true) {
 		    DevicePolicyManager dpm = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
