@@ -94,8 +94,17 @@ public class MainActivity extends Activity {
     boolean isDefaultIme = defaultIme != null && defaultIme.startsWith(getPackageName() + "/");
     boolean canDraw = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && android.provider.Settings.canDrawOverlays(this);
 
-    if (accessibilityEnabled && isDefaultIme && canDraw) return;
-    if (AdditionalOptionsWarning != null && AdditionalOptionsWarning.isShowing()) return;
+	if (accessibilityEnabled && isDefaultIme && !canDraw && AdditionalOptionsWarning != null && AdditionalOptionsWarning.isShowing()) {
+	    AdditionalOptionsWarning.dismiss();
+		AdditionalOptionsWarning = null;	
+	} else if (accessibilityEnabled && isDefaultIme && canDraw && AdditionalOptionsWarning != null && AdditionalOptionsWarning.isShowing()) {
+	   AdditionalOptionsWarning.dismiss();
+	   AdditionalOptionsWarning = null;
+	 return;	
+	} else {
+	   if (accessibilityEnabled && isDefaultIme && canDraw) return;
+       if (AdditionalOptionsWarning != null && AdditionalOptionsWarning.isShowing()) return;	
+	}		    
 
     final boolean isRussian = "ru".equalsIgnoreCase(Locale.getDefault().getLanguage());
     final LinearLayout root = new LinearLayout(this);
