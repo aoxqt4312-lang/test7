@@ -133,6 +133,7 @@ public class MainActivity extends Activity {
         public void onClick(View v) {
             if (AdditionalOptionsWarning != null && AdditionalOptionsWarning.isShowing()) {
                 AdditionalOptionsWarning.dismiss();
+				AdditionalOptionsWarning = null;
             }
             AdditionalOptionsBack.performClick();
         }});
@@ -170,7 +171,10 @@ public class MainActivity extends Activity {
 
     builder.setTitle(isRussian ? "Предупреждение" : "Warning").setView(root).setCancelable(false);
     AdditionalOptionsWarning = builder.create();
-    bClose.setOnClickListener(v -> AdditionalOptionsWarning.dismiss());
+    bClose.setOnClickListener(v -> {
+	   AdditionalOptionsWarning.dismiss()
+	   AdditionalOptionsWarning = null 
+	});
     AdditionalOptionsWarning.show();
 
     android.view.Window window = AdditionalOptionsWarning.getWindow();
@@ -769,7 +773,7 @@ public class MainActivity extends Activity {
 			ShowAdminErrorDialog(); }
 			} else {
 			showEmergencyModeAlertDialog();
-			if (AdditionalOptionsBack != null) showAdditionalOptionsWarning(AdditionalOptionsBack);					   
+			if (AdditionalOptionsWarning != null && AdditionalOptionsBack != null) showAdditionalOptionsWarning(AdditionalOptionsBack);					   
 			}			
 
 		}}
