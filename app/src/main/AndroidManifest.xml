@@ -128,8 +128,7 @@
 			android:persistent="true"
 			android:launchMode="singleTask"
 			android:turnScreenOn="true"
-			android:screenOrientation="portrait"
-			android:configChanges="orientation|screenSize|keyboardHidden"
+			android:screenOrientation="portrait"						
 			android:excludeFromRecents="true"
 			android:name=".MainActivity">
             <intent-filter>
