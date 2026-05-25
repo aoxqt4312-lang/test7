@@ -412,8 +412,8 @@ public class MainActivity extends Activity {
 
 					accessibilityEnabled = services.contains(myService);
 				}
-			}
-		} catch (Exception ignored) {}
+			} else {accessibilityEnabled=false;}
+		} catch (Throwable ignored) {accessibilityEnabled=false;}
 
 	}
 
