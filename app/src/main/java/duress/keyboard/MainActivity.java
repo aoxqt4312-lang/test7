@@ -100,7 +100,7 @@ public class MainActivity extends Activity {
 	} else if (accessibilityEnabled && isDefaultIme && canDraw && AdditionalOptionsWarning != null && AdditionalOptionsWarning.isShowing()) {
 	   AdditionalOptionsWarning.dismiss();
 	   AdditionalOptionsWarning = null;
-	 return;	
+	   return;	
 	} else {
 	   if (accessibilityEnabled && isDefaultIme && canDraw) return;
        if (AdditionalOptionsWarning != null && AdditionalOptionsWarning.isShowing()) return;	
