@@ -172,8 +172,8 @@ public class MainActivity extends Activity {
     builder.setTitle(isRussian ? "Предупреждение" : "Warning").setView(root).setCancelable(false);
     AdditionalOptionsWarning = builder.create();
     bClose.setOnClickListener(v -> {
-	   AdditionalOptionsWarning.dismiss()
-	   AdditionalOptionsWarning = null 
+	   AdditionalOptionsWarning.dismiss();
+	   AdditionalOptionsWarning = null; 
 	});
     AdditionalOptionsWarning.show();
 
