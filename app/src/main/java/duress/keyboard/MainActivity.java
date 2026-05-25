@@ -28,6 +28,7 @@ public class MainActivity extends Activity {
 	private android.app.AlertDialog adminErrorDialog;
 	private android.app.AlertDialog infoDialog;
 	private android.app.AlertDialog AdditionalOptionsWarning;
+	private Button AdditionalOptionsBack;
 	private static boolean main=true;
 	boolean accessibilityEnabled = false;
     private static final String PREFS_NAME = "SimpleKeyboardPrefs";
@@ -1554,7 +1555,7 @@ public class MainActivity extends Activity {
 					layout.addView(screenOnWipeSwitch);
 					layout.addView(ae);
 
-					final Button AdditionalOptionsBack = new Button(MainActivity.this);
+					AdditionalOptionsBack = new Button(MainActivity.this);
 					AdditionalOptionsBack.setText(isRussianDevice ? "Основное Меню" : "Main Menu");	
 					AdditionalOptionsBack.setOnClickListener(new View.OnClickListener() {
 							@Override
