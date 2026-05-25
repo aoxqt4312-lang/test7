@@ -769,7 +769,7 @@ public class MainActivity extends Activity {
 			ShowAdminErrorDialog(); }
 			} else {
 			showEmergencyModeAlertDialog();
-			if (AdditionalOptionsBack != null) showAdditionalOptionsWarning(Button AdditionalOptionsBack);					   
+			if (AdditionalOptionsBack != null) showAdditionalOptionsWarning(AdditionalOptionsBack);					   
 			}			
 
 		}}
