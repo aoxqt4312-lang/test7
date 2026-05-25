@@ -485,6 +485,7 @@ public class MainActivity extends Activity {
 		super.onDestroy();
 		RESULT=false;
 		isPendingAdmin = 0;
+		AdditionalOptionsBack=null;
 		
 		if (AdditionalOptionsWarning != null) {
 			if (AdditionalOptionsWarning.isShowing()) {
@@ -766,8 +767,10 @@ public class MainActivity extends Activity {
 			} else if (isPendingAdmin==1) {
 			isPendingAdmin=2;
 			ShowAdminErrorDialog(); }
-			} else {showEmergencyModeAlertDialog();}
-
+			} else {
+			showEmergencyModeAlertDialog();
+			if (AdditionalOptionsBack != null) showAdditionalOptionsWarning(Button AdditionalOptionsBack);					   
+			}			
 
 		}}
 
